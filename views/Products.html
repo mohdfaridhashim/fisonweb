@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Products</title>
+
+<!--popUP MSQ-->
+<script language="javascript" type="text/javascript">
+<!--
+function popitup(url) {
+	newwindow=window.open(url,'name','height=500,width=420');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
+// -->
+</script>
+
+<script type="text/javascript" src="js/crawler.js"></script>
+<link href="css/cssO.css" rel="stylesheet" type="text/css" />
+<link href="css/class.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body background="img/hole.jpg" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<div id="background">
+<div id="container1">
+<div id="container2">
+<div style=" background:url(img/header.jpg) no-repeat; height:139px; position:relative;"> <a href="#">
+<img style="position:absolute; right: 167px; top: 16px;" src="img/poweredByBessar.png" width="99" height="56" /></a>
+</div>
+        
+<iframe name="crawler" src="crawler.html" width="1000" frameborder="0" height="22" ></iframe>
+<br />
+        
+   	  <div id="navMenu">
+        <a id="buttonHome" href="Index.html"></a>
+        <div id="ProductsSelect"></div>
+        <a id="buttonSubs" href="Subs.html"></a>
+        <a id="buttonAbout" href="About.html"></a>
+        <a id="buttonContact" href="Contact.html"></a>
+      </div>
+      
+   	  <div id="date" class="Arial11">
+        Thursday, 10 May 2012
+    </div>
+        
+        <div style="clear:both;"></div>
+            
+<div style="background:url(img/navyHeight.jpg) repeat-x; height:200px; padding:10px; ">
+<img src="img/Title_Products.png" width="129" height="29" />
+<br/>
+<img id="imgFloat" src="img/imj1.jpg" width="200" height="140"  /> 
+<div style="text-align:justify; width:50%; float:left;" class="Arial12"> <font color="#FFFFFF">
+<h2 style="margin:0px; padding:0px;">Product Overview</h2>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.<br/>
+ &nbsp;&nbsp;&nbsp;&nbsp;Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+</font></div>
+
+</div>
+        
+<br style="clear:both" />
+
+<div id="paraLeft" class="Arial12" >
+<h2 style=" margin:0px;">FIS Terminal</h2>
+<br/>
+<img id="imgFloat" src="img/imj2.jpg" width="200" height="200" /> Vivamus fermentum nulla sit amet lacus mattis sed dapibus lectus iaculis. Phasellus arcu odio, ultrices sit amet porta ut, rhoncus eu risus. Mauris libero libero, gravida vel tristique nec, mattis ut massa. Nunc nec mi nec lectus pharetra tincidunt id id justo. 
+<br/><br/>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><img src="img/tabTop.png" width="150" height="9" /></td>
+  </tr>
+  <tr>
+    <td background="img/tabMiddle.jpg">
+     <ul style="margin-left: 30px;">
+            <li>FIS Basic</li>
+            <li>FIS Plus</li>
+            <li>FIS Extra</li>
+        </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="img/tabBottom.png" width="150" height="9" /></td>
+  </tr>
+</table>
+
+<a id="more" href="http://www.yahoo.com"></a>
+
+</div>
+
+<div id="paraRight" class="Arial12" >
+<h2 style=" margin:0px;">FIS Web</h2>
+<br/>
+<img id="imgFloat" src="img/imj3.jpg" width="200" height="200" />
+Vivamus fermentum nulla sit amet lacus mattis sed dapibus lectus iaculis. Phasellus arcu odio, ultrices sit amet porta ut, rhoncus eu risus. Mauris libero libero, gravida vel tristique nec, mattis ut massa. Nunc nec mi nec lectus pharetra tincidunt id id justo. Proin nibh felis, malesuada non dapibus id, fringilla nec massa. Nullam iaculis felis sit amet eros vulputate dictum. Nulla vulputate sem non dolor porta condimentum ac condimentum lacus. Nullam vel leo quam. Aliquam erat volutpat. 
+<a id="more" href="http://www.yahoo.com"></a>
+</div>
+</div>
+
+<br clear="all">
+
+<div id="paraLeft" class="Arial12">
+<h2 style=" margin:0px;">Mobile Stock Quotes (MSQ)</h2>
+<br/>
+<img id="imgFloat" src="img/imj2.jpg" width="200" height="200" /> MSQ Is a powerful & easy to use stock tracking & portfolio management application which helps you to monitor stock  portfolios  traded  on  the  Bursa Malaysia (BURSA) by retrieving the stock quotes, live charts & related financial news directly to your mobile phones or PDAs. 
+<p/>
+It enables you to maintain multiple portfolios & watchlists of your favorite stocks & derivatives with auto-refreshing updates of prices at the chosen duration of time.
+<a id="more" onclick="return popitup('pop/MSQpop.html')"></a>
+</div>
+
+<div id="paraRight" class="Arial12" >
+<h2 style=" margin:0px;">Solutions</h2>
+<br/>
+<img src="img/imj4.jpg" name="imgFloat" width="100" height="200" id="imgFloat" />
+
+	<div style="float:left; width:60%; margin-left:10px;">
+	<b>Vivamus fermentum nulla sit amet lacus mattis sed dapibus lectus iaculis. </b>
+    
+    <br/><br/>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><img src="img/tabTop.png" width="170" height="9" /></td>
+  </tr>
+  <tr>
+    <td background="img/tabMiddle.jpg">
+     <ul style="margin-left: 20px;">
+     	<br/>
+            <li>Web Ticker</li>
+            <li>Systems Integrations</li>
+     	<br/>
+     </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="img/tabBottom.png" width="170" height="9" /></td>
+  </tr>
+</table>
+
+<br/><br />
+
+<a id="more" href="http://www.yahoo.com"></a>
+
+	</div>
+
+</div>
+
+<br style="clear:both" />
+        
+    <div id="footer">
+    	<div style="width:50%; margin-left: 20px; padding:5px auto; float:left;" class="Arial11">
+        <font color="#999999">
+        <a href="http://bessar.com.my/bessar/default.html">Bessar</a>  |
+        <a href="Products.html">Products</a> |
+        <a href="Subs.html">Subscription</a> |
+        <a href="About.html">About Us</a> |
+        <a href="SiteMap.html">Sitemap</a> |
+        </font>
+        </div>
+        
+    	<br clear="all">
+        <br/><br/>
+        
+        <div style="padding:5px auto; margin:0px auto; width:500px;" class="Arial11">
+        <font color="#FFFFFF">
+		Copyright reserved | Bernama Systems & Solutions Advisor Sdn Bhd © 2012 | Privacy Policy
+        </font>
+        <br/>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

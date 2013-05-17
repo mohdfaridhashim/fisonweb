@@ -1,0 +1,1 @@
+<?php echo $views[0]; ?>

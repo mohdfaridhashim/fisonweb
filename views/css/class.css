@@ -1,0 +1,77 @@
+@charset "utf-8";
+
+.Arial10 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFF;
+	text-align: left;
+}
+
+.Arial11 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #FFF;
+}
+
+a .Arial11 {
+	color: #FFF;
+}
+
+.Arial12 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFF;
+}
+
+A:link {
+	text-decoration: none;
+	color: #FFF;
+	}
+	
+A:visited {
+	text-decoration: none;
+	color: #FFF;
+	}
+	
+A:active {
+	text-decoration: none;
+	}
+	
+A:hover {
+	text-decoration: none;
+	color: #999;
+	}
+	
+ul
+  {
+  margin-left: 0;
+  padding-left: 1em;
+  }
+  
+li
+  {
+  margin: 0;
+  padding: 0;
+}
+  
+.title {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	color: #FFF;
+	letter-spacing: -0.05em;
+}  
+.title01 {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	letter-spacing: -0.05em;
+	color: #3C3;
+
+}
+
+.desc {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 11px;
+	font-style: italic;
+	color: #333;
+}
