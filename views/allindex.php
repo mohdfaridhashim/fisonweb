@@ -24,7 +24,7 @@
 			var feed;
 			var list3 = null;
 			var list4 = null;
-			var data = new Array();
+			//var data = new Array();
 		 // Let the library know where WebSocketMain.swf is:
   		WEB_SOCKET_SWF_LOCATION = "views/socket/WebSocketMain.swf";
 
@@ -111,16 +111,16 @@ function update(data)
 			if(feed.HIGH != undefined)
 			{
 				//list.getElementsByTagName("td")[9].innerHTML = feed.HIGH.toFixed(3);
-				list.getElementsByTagName("td")[9].innerHTML = feed.HIGH;
+				list.getElementsByTagName("td")[5].innerHTML = feed.HIGH;
 				hc = setcolor(feed.HIGH,prev);
-				blinkColor3(i, 9,hc);
+				blinkColor3(i, 5,hc);
 			}
 			if(feed.LOW != undefined)
 			{
 				//list.getElementsByTagName("td")[10].innerHTML = feed.LOW.toFixed(3);
-				list.getElementsByTagName("td")[10].innerHTML = feed.LOW;
+				list.getElementsByTagName("td")[6].innerHTML = feed.LOW;
 				lwc =  setcolor(feed.LOW,prev);
-				blinkColor3(i, 10, lwc);
+				blinkColor3(i, 6, lwc);
 			}
 			if(feed.VOL != undefined)
 			{
@@ -131,7 +131,7 @@ function update(data)
 		}
 		}
 		list = null;
-		feed = null;
+		//feed = null;
 		chg = null;
 		data = null;
 		lc = null;
@@ -165,7 +165,7 @@ function blinkColor2(r, c) {
 	bgcolor = list.getElementsByTagName("td")[0].style.background;
 	list.getElementsByTagName("td")[c].style.color = "black";
     list.getElementsByTagName("td")[c].style.background = "Chocolate";
-    setTimeout(function () { setblinkColor2(r, c,bgcolor) }, 400);
+    setTimeout(function () { setblinkColor2(r, c,bgcolor) }, 200);
 }
 function setblinkColor2(r, c,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
@@ -179,7 +179,7 @@ function blinkColorvol(r, c) {
 	bgcolor = list.getElementsByTagName("td")[0].style.background;
 	list.getElementsByTagName("td")[c].style.color = "black";
     list.getElementsByTagName("td")[c].style.background = "Chocolate";
-    setTimeout(function () { setblinkColorvol(r, c,bgcolor) }, 400);
+    setTimeout(function () { setblinkColorvol(r, c,bgcolor) }, 200);
 }
 function setblinkColorvol(r, c,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
@@ -194,12 +194,13 @@ function blinkColor3(r, c,d) {
 	//var bgcolor = oddeven(r);
     list.getElementsByTagName("td")[c].style.color = "chocolate";
     list.getElementsByTagName("td")[c].style.background = d;
-    setTimeout(function () { setblinkColor3(r, c,d,bgcolor) }, 400);
+    setTimeout(function () { setblinkColor3(r, c,d,bgcolor) }, 200);
 }
 function setblinkColor3(r, c,d,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
     list.getElementsByTagName("td")[c].style.color = d;
     list.getElementsByTagName("td")[c].style.background = bgcolor;
+	list = null;
 }
 		</script>
 

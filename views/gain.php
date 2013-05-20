@@ -34,7 +34,7 @@
 				var feed;
 				var list3 = null;
 			var list4 = null;
-			var data = new Array();
+			var data = [];
 		 // Let the library know where WebSocketMain.swf is:
   		WEB_SOCKET_SWF_LOCATION = "views/socket/WebSocketMain.swf";
 
@@ -102,14 +102,14 @@ function update(data)
 			if(feed.BUY != undefined)
 			{
 				//list.getElementsByTagName("td")[6].innerHTML = feed.BUY.toFixed(3);
-				list.getElementsByTagName("td")[6].innerHTML = feed.BUY;
+				list.getElementsByTagName("td")[6].innerHTML = feed.BUY.toFixed(3);
 				bc = setcolor(feed.BUY,prev);
 				blinkColor3(i, 6, bc);
 			}
 			if(feed.SELL != undefined)
 			{
 				//list.getElementsByTagName("td")[7].innerHTML = feed.SELL.toFixed(3);
-				list.getElementsByTagName("td")[7].innerHTML = feed.SELL;
+				list.getElementsByTagName("td")[7].innerHTML = feed.SELL.toFixed(3);
 				sc = setcolor(feed.SELL,prev);
 				blinkColor3(i, 7, sc);
 			}
@@ -121,27 +121,27 @@ function update(data)
 			if(feed.HIGH != undefined)
 			{
 				//list.getElementsByTagName("td")[9].innerHTML = feed.HIGH.toFixed(3);
-				list.getElementsByTagName("td")[9].innerHTML = feed.HIGH;
+				list.getElementsByTagName("td")[9].innerHTML = feed.HIGH.toFixed(3);
 				hc = setcolor(feed.HIGH,prev);
 				blinkColor3(i, 9,hc);
 			}
 			if(feed.LOW != undefined)
 			{
 				//list.getElementsByTagName("td")[10].innerHTML = feed.LOW.toFixed(3);
-				list.getElementsByTagName("td")[10].innerHTML = feed.LOW;
+				list.getElementsByTagName("td")[10].innerHTML = feed.LOW.toFixed(3);
 				lwc =  setcolor(feed.LOW,prev);
 				blinkColor3(i, 10, lwc);
 			}
 			if(feed.VOL != undefined)
 			{
 				list.getElementsByTagName("td")[11].innerHTML = feed.VOL;
-				blinkColorvol(i, 11);
+				blinkColor2(i, 11);
 			}
 			break;
 		}
 		}
 		list = null;
-		feed = null;
+		//feed = null;
 		chg = null;
 		data = null;
 		lc = null;
@@ -175,12 +175,13 @@ function blinkColor2(r, c) {
 	bgcolor = list.getElementsByTagName("td")[0].style.background;
 	list.getElementsByTagName("td")[c].style.color = "black";
     list.getElementsByTagName("td")[c].style.background = "Chocolate";
-    setTimeout(function () { setblinkColor2(r, c,bgcolor) }, 400);
+    setTimeout(function () { setblinkColor2(r, c,bgcolor) }, 200);
 }
 function setblinkColor2(r, c,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
     list.getElementsByTagName("td")[c].style.color = "black";
     list.getElementsByTagName("td")[c].style.background = bgcolor;
+	list = null;
 }
 //
 function blinkColor3(r, c,d) {
@@ -189,12 +190,15 @@ function blinkColor3(r, c,d) {
 	//var bgcolor = oddeven(r);
     list.getElementsByTagName("td")[c].style.color = "chocolate";
     list.getElementsByTagName("td")[c].style.background = d;
-    setTimeout(function () { setblinkColor3(r, c,d,bgcolor) }, 400);
+    setTimeout(function () { setblinkColor3(r, c,d,bgcolor) }, 200);
+	list = null;
+	bgcolor = null;
 }
 function setblinkColor3(r, c,d,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
     list.getElementsByTagName("td")[c].style.color = d;
     list.getElementsByTagName("td")[c].style.background = bgcolor;
+	list = null;
 }
 //sort
          

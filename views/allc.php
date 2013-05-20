@@ -46,7 +46,10 @@
   		ws.onmessage = function(e) {
     	// Receives a message.
     	//alert(e.data);
+		if(data != "Connected to Feed Server.")
+		{
 		update(e.data);
+		}
   		};
   		ws.onclose = function() {
     	//alert("closed");
@@ -62,13 +65,16 @@ function update(data)
 {
 
 	
-	feed = eval('('+data+')');
-	//var feed = eval(data);
+	//feed =  eval('(' + message + ')');		
+	var feed = JSON.parse(data);
 	//console.log(data);
+	//var feed = eval(data);
 	//var color = eval(data);
 	//var chg = eval(data3);
 	//note: this loop is temporary, need optmization
-	for(var i= 1; i <= 1635; i++)
+	if(feed.CODE != undefined)
+	{
+	for(var i= 0; i < <?php echo $views[1]; ?>; i++)
 	{
 		
 		//var  list = document.getElementById('counter');
@@ -76,7 +82,7 @@ function update(data)
 		if (typeof(list) != 'undefined' && list != null)
 		{
   		// exists.
-		
+
 		if(list.getElementsByTagName("td")[0].innerHTML == feed.CODE )
 		{
 			var prev = list.getElementsByTagName("td")[2].innerHTML;
@@ -133,13 +139,13 @@ function update(data)
 			if(feed.VOL != undefined)
 			{
 				list.getElementsByTagName("td")[11].innerHTML = feed.VOL;
-				blinkColorvol(i, 11);
+				blinkColor2(i, 11);
 			}
 			break;
 		}
 		}
 		list = null;
-		feed = null;
+		//feed = null;
 		chg = null;
 		data = null;
 		lc = null;
@@ -164,6 +170,19 @@ function update(data)
 		{
 		return "red";
 		}
+	}
+	//end if
+		list = null;
+		//feed = null;
+		chg = null;
+		data = null;
+		lc = null;
+		lcc = null;
+		bc = null;
+		sc = null;
+		hc = null;
+		lwc = null;
+		prev = null;
 	}
 }
 //blink

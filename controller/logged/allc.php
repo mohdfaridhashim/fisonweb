@@ -11,6 +11,7 @@ public $ticker;
 public function __construct()  {
 	//$this->scoreboard = new scoreboard();
 	$this->all = new allcounters();
+	$this->all->set_allcounter();
 	}
 
 public function main()
@@ -49,7 +50,7 @@ public function get_rows()
 public function getallcounter()
 {
 	//$this->scoreboard->create_list_stock();
-	$this->all->set_allcounter();
+	
 	return $this->all->get_allc();
 }
 

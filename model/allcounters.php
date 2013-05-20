@@ -16,8 +16,8 @@ public function set_allcounter()
  	//$total = $this->row;
 	for($i=0;$i< $this->row;$i++)
 	{
-		if($this->liststock[$i][19] == "0")
-		{
+		//if($this->liststock[$i][19] == "0")
+		//{
 		 $this->allcounter_data[$a][0] = $this->liststock[$i][0] ; //code
 		 $this->allcounter_data[$a][1] = $this->liststock[$i][1] ; //symbol
 		 $this->allcounter_data[$a][2] = $this->liststock[$i][2] ; //prev
@@ -39,7 +39,7 @@ public function set_allcounter()
 		 $this->allcounter_data[$a][18] = $this->liststock[$i][18] ; //value
 		 $this->allcounter_data[$a][19] = $this->liststock[$i][19] ; //value
 		 $a++;
-		}
+		//}
 		
 	}
 	$this->row_allc = $a;

@@ -34,7 +34,7 @@
 				var feed;
 				var list3 = null;
 			var list4 = null;
-			var data = new Array();
+			var data = [];
 		 // Let the library know where WebSocketMain.swf is:
   		WEB_SOCKET_SWF_LOCATION = "views/socket/WebSocketMain.swf";
 
@@ -132,7 +132,7 @@ function update(data)
 		}
 			list = null;
 			data = null;
-			feed = null;
+			//feed = null;
 	}
 }
 
@@ -143,7 +143,7 @@ function blinkColor2(r, c) {
 	list.getElementsByTagName("td")[c].style.color = "black";
     list.getElementsByTagName("td")[c].style.background = "Chocolate";
 	list = null;
-    setTimeout(function () { setblinkColor2(r, c,bgcolor) }, 400);
+    setTimeout(function () { setblinkColor2(r, c,bgcolor) }, 200);
 }
 function setblinkColor2(r, c,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
@@ -159,7 +159,7 @@ function blinkColor3(r, c,d) {
     list.getElementsByTagName("td")[c].style.color = "chocolate";
     list.getElementsByTagName("td")[c].style.background = d;
 	list = null;
-    setTimeout(function () { setblinkColor3(r, c,d,bgcolor) }, 400);
+    setTimeout(function () { setblinkColor3(r, c,d,bgcolor) }, 200);
 }
 function setblinkColor3(r, c,d,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
