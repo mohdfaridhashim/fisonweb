@@ -21,7 +21,7 @@
 <br />
         
    	  <div id="navMenu">
-        <a id="buttonHome" href="../index.php?watch=home"></a>        
+        <a id="buttonHome" href="Index.html"></a>        
         <a id="buttonProducts" href="Products.html"></a>
         <a id="buttonSubs" href="Subs.html"></a>
         <div id="AboutSelect"></div>

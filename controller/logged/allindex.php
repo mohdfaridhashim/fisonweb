@@ -33,7 +33,7 @@ public function view_option()
 {
 	//include user define view or replace default view
 	//option included, excluded
-	return "included";
+	return "excluded";
 }
 //user define method
 public function get_allindex()

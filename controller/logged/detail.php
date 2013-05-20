@@ -38,7 +38,7 @@ public function view_option()
 {
 	//include user define view or replace default view
 	//option included, excluded
-	return "included";
+	return "excluded";
 }
 
 public function get_track()

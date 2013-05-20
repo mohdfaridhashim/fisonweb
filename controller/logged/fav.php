@@ -7,7 +7,7 @@ class fav_controller
 var $bil=2;
 var $rows=0;
 var $fav = array();
-public function __construct()  {}
+public function __construct()  {$this->favourite = new favourite();}
 
 public function main()
 {
@@ -35,11 +35,11 @@ public function view_option()
 {
 	//include user define view or replace default view
 	//option included, excluded
-	return "included";
+	return "excluded";
 }
 public function getfavouritelist()
 {
-	$this->favourite = new favourite();
+	
 	//$this->favourite ->create_list_stock();
 	$lastrows = $this->favourite->get_row();
 	$this->favourite->sum_rows($lastrows);

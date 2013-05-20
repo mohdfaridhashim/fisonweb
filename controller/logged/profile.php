@@ -35,7 +35,7 @@ public function view_option()
 {
 	//include user define view or replace default view
 	//option included, excluded
-	return "included";
+	return "excluded";
 }
 //display user detail
 public function getdetail()

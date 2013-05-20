@@ -47,7 +47,7 @@ class tracking extends liststock
  	$i = 0;
 	$db = new Database();
 	$trade = array();
-	$sql = "SELECT last,timestamp FROM tracking_lhlqv WHERE code = '$code' order by trade_id asc";
+	$sql = "SELECT last,timestamp FROM tracking_lhlqv WHERE code = '$code' order by trade_id asc ";
 	//query the sql statement
 	$db->query($sql);
 	$this->intra_row = $db->numRows();
@@ -87,7 +87,8 @@ class tracking extends liststock
 	$trade = array();
 	$stock = $this->stock_info($code);
 	$prev = $stock[2];
-	$sql = "SELECT l.timestamp,l.last,b.bcum,b.scum,b.buy,b.sell,l.high,l.low,l.qty,l.vol FROM tracking_lhlqv l,tracking_bbss b WHERE l.code = b.code and l.code = '$code' and b.code ='$code' order by l.trade_id desc";
+	//$sql = "SELECT l.timestamp,l.last,b.bcum,b.scum,b.buy,b.sell,l.high,l.low,l.qty,l.vol FROM tracking_lhlqv l,tracking_bbss b WHERE l.code = b.code and l.code = '$code' and b.code ='$code' order by l.trade_id desc LIMIT 150000,10";
+		$sql = "SELECT l.timestamp,l.last,b.bcum,b.scum,b.buy,b.sell,l.high,l.low,l.qty,l.vol FROM tracking_lhlqv l,tracking_bbss b  WHERE l.code = b.code and l.code = '$code' and b.code ='$code'  order by l.trade_id desc LIMIT 150000,10";
 	//query the sql statement
 	$db->query($sql);
 	// return a single row of data

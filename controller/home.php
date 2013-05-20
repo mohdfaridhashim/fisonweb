@@ -6,7 +6,7 @@ include_once 'model/scoreboard.php';
 include_once 'model/ticker.php';
 class home_controller
 {
-var $bil=2;
+var $bil=0;
 public $scoreboard;
 public $ticker;
 public function __construct()  {
@@ -29,6 +29,8 @@ public function get_num_func()
 {	
 	return $this->bil;
 }
+
+//future reference
 public function getscoreboard()
 {
 	$score = array();
@@ -42,7 +44,12 @@ public function getscoreboard()
 	$score[5] = $this->scoreboard->get_unchg();
 	return $score;
 }
-
+public function view_option()
+{
+	//include user define view or replace default view
+	//option included, excluded
+	return "none";
+}
 public function getfbmklci()
 {
 	//$this->scoreboard->create_list_stock();

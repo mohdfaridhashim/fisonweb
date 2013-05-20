@@ -4,7 +4,12 @@ class allcounters extends liststock
 {
 	public $allcounter_data = array();
 	var $row_allc;
-
+//overide listtock
+function __construct()
+{
+		//it will read all allcounters and all index
+		$this->create_list_stock();
+}
 public function set_allcounter()
 {
  	$a = 0;

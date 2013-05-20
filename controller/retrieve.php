@@ -1,7 +1,6 @@
 <?php
-if (!isset($_SESSION)) session_start();
 include_once('model/user.php');
-class home_controller
+class retrieve_controller
 {
 //number of method
 var $bil=1;
@@ -29,13 +28,13 @@ public function get_num_func()
 public function view()
 {
 	//user define view file
-	return "miniprofile.php";
+	return "profile.php";
 }
 public function view_option()
 {
 	//include user define view or replace default view
 	//option included, excluded
-	return "included";
+	return "excluded";
 }
 //display user detail
 public function getdetail()

@@ -40,8 +40,10 @@ if(isset($_SESSION['userid']))
 				if($class == "home_controller")
 				{
 					//this will load all default
+					
 					$default = SERVER_ROOT . '/controller/logged/home.php';
 					include_once($default);
+					/*
 					$defaulter = new $class;
 					$scoreboard = array();
 					$scoreboard = $defaulter->getscoreboard();
@@ -52,22 +54,27 @@ if(isset($_SESSION['userid']))
 					$allc_rows = $defaulter->get_rows();
 					$home_option = $defaulter->view_option();
 					$filename = $defaulter->view();
+					
 					//default view option
-					$view_option = "included";
+					//$view_option = "included";
 					//routing the view
 					//this will include the table inside the view
 					
 					//for user profile
 					$fisuser = SERVER_ROOT . '/controller/logged/profile.php';
 					include_once($fisuser);
-					$fisuerdata = new profile_controller();
+					*/
+					$view_option = "included";
+					$fisuerdata = new home_controller();
 					$userdata = array();
 					$userdata = $fisuerdata->getdetail();
 					
 				} 
 				else
 				{
+				
 					//this will load all default
+					/*
 					$default = SERVER_ROOT . '/controller/logged/home.php';
 					include_once($default);
 					$defaulter = new home_controller();
@@ -82,7 +89,7 @@ if(isset($_SESSION['userid']))
 					$fisuerdata = new profile_controller();
 					$userdata = array();
 					$userdata = $fisuerdata->getdetail();
-					
+					*/					
 					
 				//this will create a class
 				$controller = new $class;
@@ -93,7 +100,10 @@ if(isset($_SESSION['userid']))
 				//view option --> included or excluded
 				$view_option = $controller->view_option();
 				//user define view
+				if($view_option != "none")
+				{
 				$user_view = $controller->view();
+				}
 				//looping until number of method executed in that class
 				for($i = 0; $i < $function_qty; $i++)
 				{
@@ -146,9 +156,9 @@ if(isset($_SESSION['userid']))
 }
 else
 {
-	//if not logged yet
-	//echo "test";
-	$page = $_GET['watch'];
+		//if not logged yet
+		//echo "test";
+		$page = $_GET['watch'];
 	
 		$functions = array();
 		//model view
@@ -168,7 +178,7 @@ else
 			//instantiate the appropriate class
 			if (class_exists($class))
 			{
-				
+				/*
 				if($class == "home_controller")
 				{
 					//this will load all default
@@ -197,7 +207,7 @@ else
 					//$loserticker = $defaulter->get_loser();
 					$fbmklci = array();
 					$fbmklci = $defaulter->getfbmklci();
-				
+				*/
 				//this will create a class
 				$controller = new $class;
 				//get the class numbers of function
@@ -205,7 +215,10 @@ else
 				//view option --> included or excluded
 				$view_option = $controller->view_option();
 				//user define view
-				$user_view = $controller->view();	
+				if($view_option != "none")
+				{
+				$user_view = $controller->view();
+				}
 				//execute main function of that class and return an array of function
 				$functions = $controller->main();
 				//looping until number of method executed in that class
@@ -222,10 +235,14 @@ else
 					}
 				}
 				
-				}
+				//}
 				if($view_option == "included")
 				{
 				//display the model view in view
+				include('views/home.php');
+				}
+				else if($view_option == "none")
+				{
 				include('views/home.php');
 				}
 				else

@@ -4,7 +4,7 @@
 <link href="views/css/class.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
         $(document).ready(function() {
-            setInterval("location.reload(true)", 120000);
+            setInterval("location.reload(true)", 20000);
         });   
     </script>
     <div id="crawler" class="Arial12" style="color: #FFF;">
@@ -18,7 +18,7 @@
         uniqueid: 'mycrawler',
         style: {
             'padding': '0px',
-            'width': '1000px',
+            'width': '1200px',
             'background': 'none',
             'border': 'none'
         },
@@ -30,5 +30,5 @@
     });
     </script>
 </div>
-<div align="right" class="Arial12"><a href="index.php?watch=ticker&tick=gain">Gain</a><a href="index.php?watch=ticker&tick=active">Active</a><a href="index.php?watch=ticker&tick=lose">Loser</div>
+<div align="right" class="Arial12"><a href="index.php?watch=ticker&tick=gain">Gain</a> <a href="index.php?watch=ticker&tick=active"> Active </a><a href="index.php?watch=ticker&tick=lose">Loser</a></div>
 

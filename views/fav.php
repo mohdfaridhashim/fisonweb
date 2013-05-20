@@ -15,84 +15,77 @@
   				url: "index.php?watch=delfav&com="+str
   				//data: { com: "str" }
 				}).done(function( msg ) {
-		  		alert(  msg );
-				document.getElementById(id).remove();
+		  		
+				$(document.getElementById(id)).remove();
+				alert(  msg );
 				});
 			}
 			
 			//conn
-
-	$(function(){
-			var data = new Array();
-			var color = new Array();
-			var color2 = new Array();
-			var list3 = null;
-			var list4 = null;
-			var list = null;
-			var list2 = null;
-			var a = 0;
-			var feed = 0;
-			var color = 0;
 			var chg = 0;
-			var bgcolor = null;
-			
-   		 	var socket = io.connect('http://<?php echo SERVER_IP?>:8083');
-   			io.transports = ['websocket', 'flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling'];
-   
-    		socket.on('connect', function () {
-      			socket.on('fis', function(data,data2,data3) {
-				update(data,data2,data3);
-      			});
-				socket.on('refresh', function(msg) {
-				setTimeout("location.reload(true);",1500);		
-      			});
-	  			socket.on('ping', function(data){
-	  			});
-      			socket.on('disconnect', function() {
-        		document.getElementById("messages").innerHTML = 'disconnect';
-      			});
-	  			socket.on('error', function() {
-        		document.getElementById("messages").innerHTML = 'error';
-      			});
-    		});
-			
-						/* view logic */
-function update(data,data2,data3)
-{
-	//var feed = eval('('+data2+')');
-	feed = eval(data2);
-	color = eval(data);
-	chg = eval(data3);
-	bgcolor = null;
-	/*
-			var data = new Array();
-			var color = new Array();
-			var color2 = new Array();
+			var ws;
+			var feed;
 			var list3 = null;
 			var list4 = null;
-			var list = null;
-			*/
+			var data = new Array();
+		 // Let the library know where WebSocketMain.swf is:
+  		WEB_SOCKET_SWF_LOCATION = "views/socket/WebSocketMain.swf";
+
+  		// Write your code in the same way as for native WebSocket:
+  		ws = new WebSocket("ws://10.10.0.99:8083/");
+  		ws.onopen = function() {
+    	//ws.send("Hello");  // Sends a message.
+		document.getElementById("connection").innerHTML = "Connected";
+		document.getElementById("connection").style.color = "green";
+  		};
+  		ws.onmessage = function(e) {
+    	// Receives a message.
+    	//alert(e.data);
+		update(e.data);
+  		};
+  		ws.onclose = function() {
+    	//alert("closed");
+		document.getElementById("connection").innerHTML = "close";
+		document.getElementById("connection").style.color = "red";
+		
+  		};
+			
+			//logic
+			
+			/* view logic */
+function update(data)
+{
+
+	
+	feed = eval('('+data+')');
+	//var feed = eval(data);
+	//console.log(data);
+	//var color = eval(data);
+	//var chg = eval(data3);
 	//note: this loop is temporary, need optmization
 	for(var i= 1; i <= 1635; i++)
 	{
+		
 		//var  list = document.getElementById('counter');
-		 list = document.getElementById("counter").tBodies[0].rows[i];
+		var  list = document.getElementById("counter").tBodies[0].rows[i];
 		if (typeof(list) != 'undefined' && list != null)
 		{
   		// exists.
 		
 		if(list.getElementsByTagName("td")[0].innerHTML == feed.CODE )
 		{
-			bgcolor = list.getElementsByTagName("td")[0].style.background;
+			var prev = list.getElementsByTagName("td")[2].innerHTML;
 			//console.log(list.getElementsByTagName("td")[0].innerHTML);
 			if(feed.LAST != undefined)
 			{
 				//list.getElementsByTagName("td")[3].innerHTML = feed.LAST.toFixed(3);
 				list.getElementsByTagName("td")[3].innerHTML = feed.LAST;
-				blinkColor3(i, 3, color.lsc);
-				//list.getElementsByTagName("td")[4].innerHTML = chg.chg.toFixed(3);
-				list.getElementsByTagName("td")[4].innerHTML = chg.chg;
-				blinkColor3(i, 4, color.chgc);
+				chg = feed.LAST - prev;
+				lc = setcolor(feed.LAST,prev);
+				blinkColor3(i, 3, lc);
+				list.getElementsByTagName("td")[4].innerHTML = chg.toFixed(3);
+				lcc = setcolor(chg,0);
+				blinkColor3(i, 4, lcc);
 			}
 			if(feed.BCUM != undefined)
 			{
@@ -103,13 +96,15 @@ function update(data,data2,data3)
 			{
 				//list.getElementsByTagName("td")[6].innerHTML = feed.BUY.toFixed(3);
 				list.getElementsByTagName("td")[6].innerHTML = feed.BUY;
-				blinkColor3(i, 6, color.byc);
+				bc = setcolor(feed.BUY,prev);
+				blinkColor3(i, 6, bc);
 			}
 			if(feed.SELL != undefined)
 			{
 				//list.getElementsByTagName("td")[7].innerHTML = feed.SELL.toFixed(3);
 				list.getElementsByTagName("td")[7].innerHTML = feed.SELL;
-				blinkColor3(i, 7, color.slc);
+				sc = setcolor(feed.SELL,prev);
+				blinkColor3(i, 7, sc);
 			}
 			if(feed.SCUM != undefined)
 			{
@@ -120,13 +115,15 @@ function update(data,data2,data3)
 			{
 				//list.getElementsByTagName("td")[9].innerHTML = feed.HIGH.toFixed(3);
 				list.getElementsByTagName("td")[9].innerHTML = feed.HIGH;
-				blinkColor3(i, 9, color.hc);
+				hc = setcolor(feed.HIGH,prev);
+				blinkColor3(i, 9,hc);
 			}
 			if(feed.LOW != undefined)
 			{
 				//list.getElementsByTagName("td")[10].innerHTML = feed.LOW.toFixed(3);
 				list.getElementsByTagName("td")[10].innerHTML = feed.LOW;
-				blinkColor3(i, 10, color.lwc);
+				lwc =  setcolor(feed.LOW,prev);
+				blinkColor3(i, 10, lwc);
 			}
 			if(feed.VOL != undefined)
 			{
@@ -136,7 +133,32 @@ function update(data,data2,data3)
 			break;
 		}
 		}
-		
+		list = null;
+		feed = null;
+		chg = null;
+		data = null;
+		lc = null;
+		lcc = null;
+		bc = null;
+		sc = null;
+		hc = null;
+		lwc = null;
+		prev = null;
+	}
+	function setcolor(first,second)
+	{
+		if(first > second)
+		{
+		return "blue";
+		}
+		if(first == second)
+		{
+		return "green";
+		}
+		if(first < second)
+		{
+		return "red";
+		}
 	}
 }
 //blink
@@ -182,13 +204,13 @@ function setblinkColor3(r, c,d,bgcolor) {
     list.getElementsByTagName("td")[c].style.background = bgcolor;
 }
 
-});
 		</script>
 		<table width="100%" border="1" bgcolor="#FFFFFF"  >
-  		<tr>
-    	<td align="center">Favourite</td>
-  		</tr>
-		</table>        
+  <tr>
+    <td align="Left">Favourite</td>
+    <td align="right" id="connection" width="50px">&nbsp;</td>
+  </tr>
+</table>       
         <?php  if($views[1] == 0) {  ?>
 		<table width="100%" border="1" bgcolor="#FFFFFF"  >
   		<tr>
@@ -214,22 +236,22 @@ function setblinkColor3(r, c,d,bgcolor) {
       <th></th>
     </tr>
   </thead>
-  <tbody>
+ <tbody >
   <?php for($i = 0; $i < $views[1] ; $i++) { ?>
-    <tr  id="<?php echo $i; ?>">
-      <td><?php echo $views[0][$i][0]; ?></td>
+    <tr id="<?php echo $i; ?>">
+      <td><?php echo $views[0][$i][0]; ?></a></td>
       <td><?php echo $views[0][$i][1]; ?></td>
       <td><?php echo $views[0][$i][2]; ?></td>
-      <td class="center"><?php echo $views[0][$i][3]; ?></td>
-      <td class="center"><?php echo $views[0][$i][4]; ?></td>
+      <td  style="color:<?php echo $views[0][$i][13]; ?>"><?php echo $views[0][$i][3]; ?></td>
+      <td  style="color:<?php echo $views[0][$i][16]; ?>"><?php echo $views[0][$i][4]; ?></td>
       <td class="center"><?php echo $views[0][$i][5]; ?></td>
-      <td class="center"><?php echo $views[0][$i][6]; ?></td>
-      <td class="center"><?php echo $views[0][$i][7]; ?></td>
+      <td  style="color:<?php echo $views[0][$i][14]; ?>"><?php echo $views[0][$i][6]; ?></td>
+      <td  style="color:<?php echo $views[0][$i][15]; ?>"><?php echo $views[0][$i][7]; ?></td>
       <td class="center"><?php echo $views[0][$i][8]; ?></td>
-      <td class="center"><?php echo $views[0][$i][9]; ?></td>
-      <td class="center"><?php echo $views[0][$i][10]; ?></td>
-      <td class="center"><?php echo $views[0][$i][11]; ?></td>
-      <td><a href='index.php?watch=detail&c=<?php echo $views[0][$i][0]; ?>'>Detail</a>&nbsp;<a href='#' onclick="deltofav('<?php echo $views[0][$i][1];  ?>')">DELETE</a></td>
+      <td  style="color:<?php echo $views[0][$i][18]; ?>"><?php echo $views[0][$i][9]; ?></td>
+      <td  style="color:<?php echo $views[0][$i][17]; ?>"><?php echo $views[0][$i][10]; ?></td>
+      <td class="center" ><?php echo $views[0][$i][11]; ?></td>
+      <td class="center"><a href='index.php?watch=detail&c=<?php echo $views[0][$i][0]; ?>'>Detail</a>&nbsp;<a href='#' onclick="deltofav('<?php echo $views[0][$i][1];  ?>','<?php echo $i  ?>')">DELETE</a></td>
     </tr>
     <?php } ?>
   </tbody>

@@ -155,7 +155,7 @@ h2 {
 #sidebar {
 	float:left;
 	color:#FFF;
-	width:120px;
+	width:150px;
 	}	
 
 	
@@ -180,7 +180,7 @@ h2 {
 </style></head>
 
 <body>
-<div style="width:1020px; margin:0px auto; background-color:#FFF;">
+<div style="width:1200px; margin:0px auto; background-color:#FFF;">
   <div id="title_bar">
   
     <img src="views/img2/FBMlogo.png" width="143" height="30" style=" margin:10px; font-size:20px; float:left;" />  
@@ -188,12 +188,12 @@ h2 {
     <div style="margin:0px auto; width:550px;">
     
     <img src="views/img2/top_menu_left.png" width="14" height="29" style="float:left;" />    
-    <a href="index.php?watch=home" id="title_link">Allcounter</a>
-    <a href="index.php?watch=fav" id="title_link">Favourite</a>
-    <a href="index.php?watch=active" id="title_link">Most Actives</a>
-    <a href="index.php?watch=gain" id="title_link">Most Gainers</a>
-    <a href="index.php?watch=loser" id="title_link">Most Losers</a>
-    <a href="index.php?watch=allindex" id="title_link">All Index</a>     
+    <a href="index.php?watch=allc" id="title_link" target="stocktable">Allcounter</a>
+    <a href="index.php?watch=fav" id="title_link" target="stocktable">Favourite</a>
+    <a href="index.php?watch=active" id="title_link" target="stocktable">Most Actives</a>
+    <a href="index.php?watch=gain" id="title_link" target="stocktable">Most Gainers</a>
+    <a href="index.php?watch=loser" id="title_link" target="stocktable">Most Losers</a>
+    <a href="index.php?watch=allindex" id="title_link" target="stocktable">All Index</a>     
     <img src="views/img2/top_menu_right.png" width="14" height="29" style="float:left;" />    
     </div>
             
@@ -207,7 +207,7 @@ h2 {
 
     <div style="float:left; padding:0px 0px; width:100%;">
     	
-<iframe name="crawler" src="index.php?watch=ticker" width="1020" frameborder="0" height="50" scrolling="no" ></iframe>
+<iframe name="crawler" src="index.php?watch=ticker" width="1200" frameborder="0" height="50" scrolling="no" ></iframe>
 
     </div>
 
@@ -240,14 +240,31 @@ Last login:<br/><strong><?php echo $userdata[9][0];?></strong><br/>
 <div id="clear"></div>
 </div><!--left end--->
 
-<div style="float:left; background: url(views/img2/50grey.png); min-height:500px; width:800px;">
-<?php if(isset($home_option)){ include_once($filename);} elseif(isset($view_option)){ include_once($user_view);}?>
+<div style="float:left; background: url(views/img2/50grey.png); min-height:500px; width:950px;">
+<?php
+ if(isset($_GET['p']))
+ { 
+ 	//if($_GET['pilih'] != "home")
+	//{
+ 	$link = $_GET['p']; 
+	//}
+	//else
+	//{
+	//$link = "allindex" ;
+	//}
+ }
+ else { 
+ $link = "allc" ;
+ }
+
+ ?>
+<iframe name="stocktable" src="index.php?watch=<?php echo $link; ?><?php if(isset($_GET['c'])){ echo "&c=".$_GET['c']; } ?>" width="100%" frameborder="0" height="500" scrolling="no" ></iframe>
 </div>
 
 <div id="sidebar">
 <div id="FMPtitle">Final Market Report<br/></div>
 
-<iframe name="crawler" src="index.php?watch=score" width="105%" frameborder="0" height="150" scrolling="no" ></iframe>
+<iframe name="crawler" src="index.php?watch=score" width="100%" frameborder="0" height="150" scrolling="no" ></iframe>
 </div>
 <div id="clear"></div>
 <br clear="all" /> 
@@ -258,7 +275,6 @@ Last login:<br/><strong><?php echo $userdata[9][0];?></strong><br/>
     Best viewed in Mozilla Firefox 8.0 or later with 1024 x 768 resolution
     </div>
 </div>
-
 </div>
 </body>
 </html>

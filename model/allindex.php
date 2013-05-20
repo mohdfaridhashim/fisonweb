@@ -21,7 +21,7 @@ class allindex extends liststock
 		 $this->allindex_data[$a][1] = $this->liststock[$i][1] ; //symbol
 		 $this->allindex_data[$a][2] = $this->liststock[$i][2] ; //prev
 		 $this->allindex_data[$a][3] = $this->liststock[$i][3] ; //last
-		 $this->allindex_data[$a][4] = round($this->liststock[$i][4], 2);//changes
+		 $this->allindex_data[$a][4] = round($this->liststock[$i][4], 4);//changes
 		 $this->allindex_data[$a][5] =  $this->liststock[$i][5] ; //bcum
 		 $this->allindex_data[$a][6] =  $this->liststock[$i][6] ; //buy
 		 $this->allindex_data[$a][7] = $this->liststock[$i][7] ; //sell

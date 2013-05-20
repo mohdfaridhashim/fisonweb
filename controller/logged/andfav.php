@@ -40,14 +40,22 @@ public function view_option()
 
 public function adtofav()
 {
-	 $kira = $this->favourite->count_favourite($_SESSION['userid'],$_GET['com']);
-	 if($kira == 0)
+	 $kira = $this->favourite->count_favourite($_SESSION['userid']);
+	 if($kira < 20)
 	 {
-	 $message = $this->favourite->addtofavourite($_SESSION['userid'],$_GET['com']);
+	 	$no = $this->favourite->searchfavourite($_SESSION['userid'],$_GET['com']);
+	 	if($no >= 1)
+		{
+		$message = $_GET['com']." has already in your favourite list";
+		}
+		else
+		{
+		$message = $this->favourite->addtofavourite($_SESSION['userid'],$_GET['com']);
+		}
 	 }
 	 else
 	 {
-	 $message = $kira;
+	 $message = "You have exceed maximum number of favourites.";
 	 }
 	 return $message;
 }

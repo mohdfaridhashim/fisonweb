@@ -5,7 +5,7 @@ class active_controller
 {
 var $bil = 2;
 var $row;
-public function __construct()  {}
+public function __construct()  {$this->active = new ticker();}
 
 public function main()
 {
@@ -32,12 +32,12 @@ public function view_option()
 {
 	//include user define view or replace default view
 	//option included, excluded
-	return "included";
+	return "excluded";
 }
 
 public function get_active()
 {
-	$this->active = new ticker();
+	
 	$this->active->set_allcounter();
 	//$this->active->create_list_stock();
 	$this->row=$this->active->get_row_allc();

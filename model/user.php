@@ -188,6 +188,49 @@ public function remove_currentsession()
 	//query the sql statement
 	$db->query($sql);
 }
+
+public function retrieve_password()
+{
+		//call db class
+	require_once("db.php");
+ 	
+	$db = new Database();
+	
+	if(isset($_POST['username']) && isset($_POST['password']))
+	{
+	//initialize index to zero.
+	//this index is important to define number of rows if the data exist
+	$index = 0;
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	//to make sure the string is valid
+	//to avoid sql injection
+	//$who = mysql_real_escape_string($username);
+    //$pass = mysql_real_escape_string($password);
+	$who = $username;
+	$pass = $password;
+	//sql query
+	$sql = "SELECT userid from user where username='$who' and password = '$pass'";
+	//query the sql statement
+	$db->query($sql);
+	$index = $db->numRows();
+		//validate
+		if($index == 1)
+		{
+			$db->singleRecord();
+			return $db->Record['userid'];
+		}
+		else
+		{
+			return 'invalid';
+		}
+	
+	}
+	else
+	{
+		return 'undefined';
+	}	
+}
 //end class
 }
 ?>

@@ -103,15 +103,11 @@ function MM_swapImage() { //v3.0
                   ">
                     <img src="views/img/title_login.png" width="114" height="18" />
                 	<br/><br/>
-               	  <span class="Arial12"><form action="index.php?watch=login" method="post">
-                  <?php if($_GET['watch'] == "login") { echo $views[0]."<br/ >"; } ?>
-                  Username <input name="username" type="text" size="20" />
+               	  <span class="Arial12"><form action="index.php?watch=retrieve" method="post">
+                  <span>Please enter your email and click send</span><br /><br/>
+                  Username <input name="email" type="text" size="20" />
                   <br/><br/>
-                  Password &nbsp;<input name="password" type="password" size="20"  />
-                  <br/>
-                  <a href="index.php?watch=forgot">Forgot password?
-                  </a><br/>
-                  <input style="margin-top:10px; float:right;" name="Login" type="submit" value="&nbsp;Login&nbsp;"  /></form>
+                  <input style="margin-top:10px; float:right;" name="send" type="submit" value="&nbsp;Send&nbsp;"  /></form>
                   </span>
         </div>        
         <br/><br/>

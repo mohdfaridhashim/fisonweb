@@ -71,7 +71,15 @@ class favourite extends liststock
 	{
 		return $this->favrows;
 	}
-	
+	public function searchfavourite($userid,$code)
+	{
+		require_once('db.php');
+		$db = new Database();
+		$sql = "SELECT code FROM user_favourite WHERE userid= '$userid' AND code= '$code'";
+		$db->query($sql);
+		$count = $db->numRows();
+		return $count;
+	}
 	public function addtofavourite($userid,$code)
 	{
 		require_once('db.php');
@@ -90,14 +98,15 @@ class favourite extends liststock
 		return $notify = $code." has been delete from your favourite list";
 	}
 	
-	public function count_favourite($userid,$code)
+	public function count_favourite($userid)
 	{
 		require_once('db.php');
 		$db = new Database();
-		$sql = "SELECT count(userid) as total from user_favourite where userid= '$userid'";
+		$sql = "SELECT count('userid') as total from user_favourite where userid= '$userid'";
 		$db->query($sql);
 		$db->singleRecord();
 		$qty = $db->Record['total'];
+		/*
 		if($qty >= 20)
 		{
 		return $notify = "You have exceed maximum number of favourites.";
@@ -105,7 +114,8 @@ class favourite extends liststock
 		else if($qty < 20)
 		{
 		return 0;
-		}
+		}*/
+		return $qty;
 	}
 }
 ?>

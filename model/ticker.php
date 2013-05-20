@@ -8,13 +8,6 @@ class ticker extends allcounters
 
 public function get_top_actives()
 {
-	//$top = array();
-	
-	//foreach ($this->allcounter_data as $list =>$row) {
-    	//$top[$list] = $row[11];
-	//}
-	
- 	//array_multisort($top,SORT_DESC,$this->allcounter_data);
 	return $this->allcounter_data;
 }
 
