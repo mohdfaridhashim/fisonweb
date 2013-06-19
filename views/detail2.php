@@ -80,9 +80,10 @@ var ohlc = [
 	
   for($i = 0; $i < $views[3]; $i++)
   {//$tarikh2 = (explode(" ",$list_hl[$i][1]));
+  $time = explode(" ",$views[2][$i][1]);
   if($i != $views[3] -1 )
   {
-  $time = explode(" ",$views[2][$i][1]);
+  
   //time,last
   ?>
   ['<?php echo $time[0]//echo $views[2][$i][1]; ?>', <?php echo $views[2][$i][0]; ?>],

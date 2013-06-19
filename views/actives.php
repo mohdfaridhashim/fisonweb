@@ -1,6 +1,22 @@
 		<style type="text/css" title="currentStyle">
-			@import "views/media/css/demo_page.css";
-			@import "views/media/css/jquery.dataTables.css";
+			/*@import "views/media/css/demo_page.css";
+			@import "views/media/css/jquery.dataTables.css"; */
+			body {
+	background-color: #333;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-image: url(img/bg.png);
+	background-repeat: repeat;
+}
+
+body,td,th {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+	
+			
 		</style>
 		<script type="text/javascript" language="javascript" src="views/media/js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="views/media/js/jquery.dataTables.js"></script>
@@ -14,7 +30,7 @@ jQuery.fn.dataTableExt.oSort['string-case-desc'] = function(x,y) {
 };
 	// define grid table
 			$(document).ready(function() {
-				$('#counter').dataTable({"sPaginationType": "full_numbers","bLengthChange": false,"bInfo": false,"bPaginate": false,"aaSorting": [[ "11", "desc" ]],"bSort": false,"sScrollY": "500px"
+				$('#counter').dataTable({"sPaginationType": "full_numbers","bLengthChange": false,"bInfo": false,"bPaginate": false,"bFilter":false,"aaSorting": [[ "11", "desc" ]],"bSort": false,"sScrollY": "500px"
 				
 						});
 			} );

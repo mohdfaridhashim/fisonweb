@@ -2,245 +2,167 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Financial Information System</title>
+<title>FIS ON WEB</title>
+<script type="text/javascript" language="javascript" src="views/media/js/jquery.js"></script>
+<script type="text/javascript" src="views/socket/swfobject.js"></script>
+<script type="text/javascript" src="views/socket/web_socket.js"></script>
+<script>
+function start(){	
+			//conn
+				var number = 1;
+				var ws;
+			//var data = new Array();
+		 // Let the library know where WebSocketMain.swf is:
+  		WEB_SOCKET_SWF_LOCATION = "views/socket/WebSocketMain.swf";
 
-    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>
-    <script type="text/javascript">
-        $(function() {
-            var offset = $("#sidebar").offset();
-            var topPadding = 15;
-            $(window).scroll(function() {
-                if ($(window).scrollTop() > offset.top) {
-                    $("#sidebar").stop().animate({
-                        marginTop: $(window).scrollTop() - offset.top + topPadding
-                    });
-                } else {
-                    $("#sidebar").stop().animate({
-                        marginTop: 0
-                    });
-                };
-            });
-        });
-		
-		var auto_refresh = setInterval(
-		function ()
-		{
-		$('#load_twickers').load('index.php?watch=ticker').fadeIn("slow");
-		}, 10000); // refresh every 10000 milliseconds
-    </script>
+  		// Write your code in the same way as for native WebSocket:
+  		ws = new WebSocket("ws://10.10.0.99:8083/");
+  		ws.onopen = function() {
+    	//ws.send("Hello");  // Sends a message.
+		document.getElementById("status").innerHTML = "Online";
+		document.getElementById("status").style.color = "green";
+		document.getElementById("statusOffline").style.background = "#0C0";
+		sendNumber();
+  		};
+  		ws.onmessage = function(e) {
+    	// Receives a message.
+    	//alert(e.data);
+		//update(e.data);
+  		};
+  		ws.onclose = function() {
+    	//alert("closed");
+		document.getElementById("status").innerHTML = "close";
+		document.getElementById("statusOffline").style.background = "#F00";
+		setTimeout(function(){start()}, 500);
+  		};
+		function sendNumber() {
+            ws.send(number.toString());
+			//60 minute
+			console.log("ping");
+            setTimeout(sendNumber, 60000);
+    	}		
+}
+start();
 
+$(document).ready(function() {
+$.ajaxSetup({ cache: false }); // This part addresses an IE bug.  without it, IE will only load the first number and will never refresh
+setInterval(function() {
+//$('#divToRefresh').load('index.php?watch=ticker');
+//$("#divToRefresh").load('index.php?watch=ticker');
+}, 3000); // the "3000" here refers to the time to refresh the div.  it is in milliseconds.
+});
+
+</script>
 <style type="text/css">
 <!--
 body {
-	background-color: #FFF;
+	background-color: #333;
 	margin-left: 0px;
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	background: url(views/img2/bg2.jpg) no-repeat center center fixed; 
-  	-webkit-background-size: cover;
-  	-moz-background-size: cover;
-  	-o-background-size: cover;
-  	background-size: cover;
+	background-image: url(views/img/bg.png);
+	background-repeat: repeat;
 }
 
-h2 {
-	color:#FFF;
+body,td,th {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+	
+h3 {
 	padding: 0px;
-	margin: 3px;
-	}
-	
-#left  {
-	float:left;
-	width: 100px;
-	}	
-
-#title_bar {
-	color:#FFF;
-	background: #099;
-	border-bottom: 2px #0C9 double;
-	}
-	
-#title_link {
-	height: 19px;
-	background:url(views/img2/top_menu_in.png) repeat-x;
-	float:left;
-	font-style: normal;
-	font-size:11px;
-	text-decoration: none;
-	padding:5px 15px;
-	color: #333;
-	}
-	
-#title_link:hover {
-	background:url(views/img2/50grey.png);
-	color:#FFF;
-	text-decoration: underline;
-	}
-	
-#logout {
-	float:right;
-	margin-left:10px;
-	font-style: normal;
-	text-decoration: none;
-	padding: 5px;
-	color: #FFF;
-	}	
-	
-#ticker {
-	background: url(views/img2/tickerBG.png) #000 repeat-x;
-	border-bottom: #333 1px solid;
-	font-size:11px;
-	color:#FFF;
-	margin-bottom:1px;
-	}
-	
-#profile {
-	font-size:11px;
-	width:100px;
-	border-bottom:1px solid #CCC;
-	}	
-	
-#profile_title {
-	-webkit-border-radius: 0px 4px 0px 0px;
-	-moz-border-radius: 0px 4px 0px 0px;
-	border-radius: 0px 4px 0px 0px;
-	background:url(views/img2/profileTitle.png)repeat-x top;
 	margin: 0px;
-	padding: 5px;
-	height: 25px;
+	font-size:14px;
+	color:#ffcc00;
 	}
 	
-#profile_info {
-	background-color:#FFF;
-	color:#333;
-	padding:5px;
-	-webkit-border-radius: 0px 0px 4px 0px;
-	-moz-border-radius: 0px 0px 4px 0px;
-	border-radius: 0px 0px 4px 0px;
-	}
-	
-#FMPtitle {
-	padding:3px;
-	background-image: url(views/img2/bgTitleTest.png);
-	background-repeat: repeat-x;
-	background-position: top;
-	background-color: #006666;
-	-webkit-border-radius: 4px 4px 0px 0px;
-	-moz-border-radius: 4px 4px 0px 0px;
-	border-radius: 4px 4px 0px 0px;
-	}
-	
-#FMPcontent {
-	font-size:10px;
-	color:#FFFFFF;
-	background-image: url(views/img2/bgTitleTest.jpg);
-	background-repeat: repeat-x;
-	background-position: top;
-	background-color: #333;
-	padding: 3px;
-	}	
-
-#FMPvalue {
-	font-size:10px;
-	color:#FFFFFF;
-	/*background-image: url(views/img2/bgTitleTest.jpg);
-	background-repeat: repeat-x;*/
-	background-position: top;
-	padding: 3px;
-	}	
-	
-#sidebar {
-	float:left;
-	color:#FFF;
-	width:150px;
-	}	
-
-	
-#clear {
-	clear:both;
-	}	
-	
-#ads {
-	margin:10px 5px;
-	}	
-	
-.adspic {
-	border: 3px solid #CCC;
-	margin: 0px auto;
-	}	
-	
-	
-	
-	
-
 -->
-</style></head>
+</style>
+
+<link href="views/css/MWcss.css" rel="stylesheet" type="text/css" />
+</head>
 
 <body>
-<div style="width:1200px; margin:0px auto; background-color:#FFF;">
-  <div id="title_bar">
-  
-    <img src="views/img2/FBMlogo.png" width="143" height="30" style=" margin:10px; font-size:20px; float:left;" />  
-      
-    <div style="margin:0px auto; width:550px;">
+<div id="mainContainer">
+
+<div id="leftContainer">
+
+	<div>
+    <img src="views/img/FBMlogo.png" />
+    <p/><p/>
     
-    <img src="views/img2/top_menu_left.png" width="14" height="29" style="float:left;" />    
-    <a href="index.php?watch=allc" id="title_link" target="stocktable">Allcounter</a>
-    <a href="index.php?watch=fav" id="title_link" target="stocktable">Favourite</a>
-    <a href="index.php?watch=active" id="title_link" target="stocktable">Most Actives</a>
-    <a href="index.php?watch=gain" id="title_link" target="stocktable">Most Gainers</a>
-    <a href="index.php?watch=loser" id="title_link" target="stocktable">Most Losers</a>
-    <a href="index.php?watch=allindex" id="title_link" target="stocktable">All Index</a>     
-    <img src="views/img2/top_menu_right.png" width="14" height="29" style="float:left;" />    
-    </div>
-            
-    <div style="float:right; margin-top:10px; padding: 5px 30px 5px 5px; font-size:11px; background: url(views/img2/50grey.png); border-bottom:1px solid #0CC;"><?php echo date('l jS \of F Y '); ?></div>
+<div id="statusContainer">
     
-    <br clear="all" />    
-  </div>
-  
-<!--ticker-->  
-<div id="ticker">
-
-    <div style="float:left; padding:0px 0px; width:100%;">
-    	
-<iframe name="crawler" src="index.php?watch=ticker" width="1200" frameborder="0" height="50" scrolling="no" ></iframe>
-
+	<h3>CONNECTION STATUS</h3>
+   	  <div style="padding: 5px;">
+        <div id="statusOffline"></div>
+        &nbsp;
+        <span id="status" class="offline">Offline</span>
+        <br clear="all" />
+        </div>
+      </div>
+        <p/>
+        
+<div id="accountContainer">
+    <h3>ACCOUNT</h3>
+    <div id="profile" style="color:#FFFFFF">
+        <DIV id="profile_info">
+        	<div align="center"><img class="imej" src="views/img/profile_pic.jpg" /></div>
+       		 <p/>
+        	<span class="greyfont">Name:</span><br/><strong><?php echo $userdata[3];?></strong><br/>
+        	<span class="greyfont">Company:</span><br/><strong><?php echo $userdata[8];?></strong><br/>
+        	<span class="greyfont">Package:</span><br/><strong>FISlite</strong><br/>
+        	<span class="greyfont">Last login:</span><br/><strong><?php echo $userdata[9][0];?></strong><br/>
+        </DIV>
+     </div>
+</div>
+<p/>
+    
+    <div id="marketContainer"> 
+   <h3>MARKET WATCH</h3>
+   <ul id="ulmarket">
+   	<li><a href="#">EQUITIES</a></li>
+    	<li id="ulmarketin"><a href="index.php?watch=active" target="stocktable">Most Active</a></li>
+        <li id="ulmarketin"><a href="index.php?watch=gain" target="stocktable">Top Gainers</a></li>
+        <li id="ulmarketin"><a href="index.php?watch=loser" target="stocktable">Top Losers</a></li>   
+    </ul>
+    <p/>
+    
+       <ul id="ulmarket">
+       <li><a href="#">DERITATIVES</a></li>
+            <li id="ulmarketin"><a href="#" target="stocktable">FKLI</a></li>
+            <li id="ulmarketin"><a href="#" target="stocktable">FCPO</a></li>
+            <li id="ulmarketin"><a href="#" target="stocktable">FPKO</a></li>
+            <li id="ulmarketin"><a href="#" target="stocktable">OKLI</a></li>   
+    </ul>
+    <p/>
+     <ul id="ulmarket">
+       <li><a href="index.php?watch=allindex" target="stocktable">INDICES</a></li>
+    </ul>
+    <p/>
     </div>
+    <p/>
+    
+    
+    <p/>
+    
+    <a href="index.php?watch=logout" style="color:#ffcc00;">Log Out</a>    </div>
+    
+</div>
 
-  <div id="clear"></div>
-  </div>
-  
- 
-<!--ticker-->   
+<div id="rightContainer">
 
-<div id="left">
-
-<div id="profile">
-<h2 id="profile_title">&nbsp;PROFILE</h2>
-<DIV id="profile_info">
-<img src="views/img2/profile_pic.jpg" />
-Name:<br/><strong><?php echo $userdata[3];?></strong><br/>
-Company:<br/><strong><?php echo $userdata[8];?></strong><br/>
-<br/>
-Last login:<br/><strong><?php echo $userdata[9][0];?></strong><br/>
-<br/><br/>
-<a href="index.php?watch=logout" style="float:right">Log Out</a>
-<br/>
-</DIV>
-</div><!--profile end--->
-
-<div id="ads"><img class="adspic" src="views/img2/Ad02.jpg"/></div>
-
-<div id="ads"><img class="adspic" src="views/img2/Ad03.jpg"/></div>
-
-<div id="clear"></div>
-</div><!--left end--->
-
-<div style="float:left; background: url(views/img2/50grey.png); min-height:500px; width:950px;">
+    <ul id='menubar'>
+    <li><img src="views/img/corner.png"/></li>
+    <li><a  href="index.php?watch=allc" target="stocktable">MARKET WATCH</a></li>
+    <li><a  href='index.php?watch=fav' target="stocktable">FAVOURITE</a></li>
+    <li><a  href='index.php?watch=chart' target="stocktable">CHART</a></li>
+    <li><a  href='index.php?watch=news' target="stocktable">NEWS</a></li>
+    <li><a href='#' style="border-right:none;">ALERT</a></li>
+    <li><img src="views/img/corner2.png"/></li>
+    </ul>
+<br clear="all" /><br/>
 <?php
  if(isset($_GET['p']))
  { 
@@ -258,23 +180,25 @@ Last login:<br/><strong><?php echo $userdata[9][0];?></strong><br/>
  }
 
  ?>
-<iframe name="stocktable" src="index.php?watch=<?php echo $link; ?><?php if(isset($_GET['c'])){ echo "&c=".$_GET['c']; } ?>" width="100%" frameborder="0" height="500" scrolling="no" ></iframe>
+<div id="accountContainer">
+<iframe name="stocktable" src="index.php?watch=<?php echo $link; ?><?php if(isset($_GET['c'])){ echo "&c=".$_GET['c']; } ?>" height="500" width="800" frameborder="0" scrolling="no"></iframe>
+
+<div id="divToRefresh"></div>
+
+<iframe name="crawler" src="index.php?watch=score" width="800" frameborder="0" height="40" scrolling="no"></iframe>
+</div>
+<br clear="all" />
+<div id="footer">
+	<div id="footerText">
+    2013 BERNAMA Systems and Solutions Advisor. <br />
+    All rights reserved.<br />
+Best viewed in Mozilla Firefox 8.0 or later with 1024 x 768 resolution </div>
+    
+<br clear="all" />
 </div>
 
-<div id="sidebar">
-<div id="FMPtitle">Final Market Report<br/></div>
+<br clear="all" />
+</div>
 
-<iframe name="crawler" src="index.php?watch=score" width="100%" frameborder="0" height="150" scrolling="no" ></iframe>
-</div>
-<div id="clear"></div>
-<br clear="all" /> 
-<div style="background:#099;">
-	<div style="margin: 0px auto; width: 50%; clear:both; text-align:center; padding:10px 0px; color: #6FF; font-size:10px;">
-    © 2013 BERNAMA Systems and Solutions Advisor. All rights reserved.
-    <br/>
-    Best viewed in Mozilla Firefox 8.0 or later with 1024 x 768 resolution
-    </div>
-</div>
-</div>
 </body>
 </html>

@@ -3,8 +3,8 @@ class Database
     {
     var $Host     = "localhost";        // Hostname of our MySQL server.
     var $Database = "fis";         // Logical database name on that server.
-    var $User     = "root";             // User and Password for login.
-    var $Password = "CNA";
+    var $User     = "fisweb";             // User and Password for login.
+    var $Password = "1234";
  
     var $Link_ID  = 0;                  // Result of mysql_connect().
     var $Query_ID = 0;                  // Result of most recent mysql_query().

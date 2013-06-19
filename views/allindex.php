@@ -1,6 +1,24 @@
 		<style type="text/css" title="currentStyle">
-			@import "views/media/css/demo_page.css";
-			@import "views/media/css/jquery.dataTables.css";
+			/*@import "views/media/css/demo_page.css";*/
+			@import "views/media/css/jquery.dataTables2.css";
+			body,td,th {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:#FFFFFF;
+}
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+h3 {
+	padding: 0px;
+	margin: 0px;
+	font-size:14px;
+	color:#ffcc00;
+	}
 		</style>
 		<script type="text/javascript" language="javascript" src="views/media/js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="views/media/js/jquery.dataTables.js"></script>
@@ -18,7 +36,10 @@
 		  		alert(  msg );
 				});
 			}
-						//conn
+function start()
+{
+			//conn
+			var number = 1;
 			var chg = 0;
 			var ws;
 			var feed;
@@ -32,21 +53,34 @@
   		ws = new WebSocket("ws://10.10.0.99:8083/");
   		ws.onopen = function() {
     	//ws.send("Hello");  // Sends a message.
-		document.getElementById("connection").innerHTML = "Connected";
-		document.getElementById("connection").style.color = "green";
+		//document.getElementById("connection").innerHTML = "Connected";
+		//document.getElementById("connection").style.color = "green";
+		sendNumber();
   		};
   		ws.onmessage = function(e) {
     	// Receives a message.
     	//alert(e.data);
 		update(e.data);
+		
   		};
   		ws.onclose = function() {
     	//alert("closed");
-		document.getElementById("connection").innerHTML = "close";
-		document.getElementById("connection").style.color = "red";
+		//document.getElementById("connection").innerHTML = "close";
+		//document.getElementById("connection").style.color = "red";
 		
   		};
-			
+		ws.error = function() {
+    	//alert("closed");
+		//document.getElementById("connection").innerHTML = "error";
+		//document.getElementById("connection").style.color = "red";
+		setTimeout(function(){start()}, 500);
+  		};
+		function sendNumber() {
+            ws.send(number.toString());
+			//60 minute
+			console.log("ping");
+            setTimeout(sendNumber, 60000);
+    	}	
 			//logic
 			
 			/* view logic */
@@ -60,7 +94,7 @@ function update(data)
 	//var color = eval(data);
 	//var chg = eval(data3);
 	//note: this loop is temporary, need optmization
-	for(var i= 1; i <= 1635; i++)
+	for(var i= 0; i <= <?php echo $views[1] ?>; i++)
 	{
 		
 		//var  list = document.getElementById('counter');
@@ -76,7 +110,7 @@ function update(data)
 			if(feed.LAST != undefined)
 			{
 				//list.getElementsByTagName("td")[3].innerHTML = feed.LAST.toFixed(3);
-				list.getElementsByTagName("td")[3].innerHTML = feed.LAST;
+				list.getElementsByTagName("td")[3].innerHTML = feed.LAST.toFixed(3);
 				chg = feed.LAST - prev;
 				lc = setcolor(feed.LAST,prev);
 				blinkColor3(i, 3, lc);
@@ -84,48 +118,19 @@ function update(data)
 				lcc = setcolor(chg,0);
 				blinkColor3(i, 4, lcc);
 			}
-			if(feed.BCUM != undefined)
-			{
-				list.getElementsByTagName("td")[5].innerHTML = feed.BCUM;
-				blinkColor2(i, 5);
-			}
-			if(feed.BUY != undefined)
-			{
-				//list.getElementsByTagName("td")[6].innerHTML = feed.BUY.toFixed(3);
-				list.getElementsByTagName("td")[6].innerHTML = feed.BUY;
-				bc = setcolor(feed.BUY,prev);
-				blinkColor3(i, 6, bc);
-			}
-			if(feed.SELL != undefined)
-			{
-				//list.getElementsByTagName("td")[7].innerHTML = feed.SELL.toFixed(3);
-				list.getElementsByTagName("td")[7].innerHTML = feed.SELL;
-				sc = setcolor(feed.SELL,prev);
-				blinkColor3(i, 7, sc);
-			}
-			if(feed.SCUM != undefined)
-			{
-				list.getElementsByTagName("td")[8].innerHTML = feed.SCUM;
-				blinkColor2(i, 8);
-			}
 			if(feed.HIGH != undefined)
 			{
 				//list.getElementsByTagName("td")[9].innerHTML = feed.HIGH.toFixed(3);
-				list.getElementsByTagName("td")[5].innerHTML = feed.HIGH;
+				list.getElementsByTagName("td")[5].innerHTML = feed.HIGH.toFixed(3);
 				hc = setcolor(feed.HIGH,prev);
 				blinkColor3(i, 5,hc);
 			}
 			if(feed.LOW != undefined)
 			{
 				//list.getElementsByTagName("td")[10].innerHTML = feed.LOW.toFixed(3);
-				list.getElementsByTagName("td")[6].innerHTML = feed.LOW;
+				list.getElementsByTagName("td")[6].innerHTML = feed.LOW.toFixed(3);
 				lwc =  setcolor(feed.LOW,prev);
 				blinkColor3(i, 6, lwc);
-			}
-			if(feed.VOL != undefined)
-			{
-				list.getElementsByTagName("td")[11].innerHTML = feed.VOL;
-				blinkColorvol(i, 11);
 			}
 			break;
 		}
@@ -146,11 +151,11 @@ function update(data)
 	{
 		if(first > second)
 		{
-		return "blue";
+		return "#00CCFF";
 		}
 		if(first == second)
 		{
-		return "green";
+		return "#00FF33";
 		}
 		if(first < second)
 		{
@@ -169,7 +174,7 @@ function blinkColor2(r, c) {
 }
 function setblinkColor2(r, c,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
-    list.getElementsByTagName("td")[c].style.color = "black";
+    list.getElementsByTagName("td")[c].style.color = "#FFFFFF";
     list.getElementsByTagName("td")[c].style.background = bgcolor;
 }
 //
@@ -202,12 +207,15 @@ function setblinkColor3(r, c,d,bgcolor) {
     list.getElementsByTagName("td")[c].style.background = bgcolor;
 	list = null;
 }
+
+//end strat();
+}
+start();
 		</script>
 
-		<table width="100%" border="1" bgcolor="#FFFFFF"  >
-  <tr>
-    <td align="Left">All Index</td>
-     <td align="right" id="connection" width="50px">&nbsp;</td>
+		<table width="100%" border="0">
+    <tr>
+    <td align="Left"><h3>ALL INDICES</h3></td>
   </tr>
 </table>
 <table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="counter">
@@ -225,7 +233,7 @@ function setblinkColor3(r, c,d,bgcolor) {
   </thead>
   <tbody>
   <?php for($i = 0; $i < $views[1] ; $i++) { if($views[0][$i][19] != "0"){ ?>
-    <tr >
+    <tr <?php echo $i ?>>
       <td><?php echo $views[0][$i][0]; ?></td>
       <td><?php echo $views[0][$i][1]; ?></td>
       <td><?php echo $views[0][$i][2]; ?></td>

@@ -17,7 +17,7 @@ public function get_total_value()
 	require_once("db.php");
  	$i = 0;
 	$db = new Database();
-	$sql = "select last,qty from tracking_lhlqv";
+	$sql = "select last,qty from stock_tracking";
 	//query the sql statement
 	$db->query($sql);
 	// return a single row of data

@@ -1,6 +1,24 @@
 		<style type="text/css" title="currentStyle">
-			@import "views/media/css/demo_page.css";
-			@import "views/media/css/jquery.dataTables.css";
+			/*@import "views/media/css/demo_page.css";*/
+			@import "views/media/css/jquery.dataTables2.css";
+			body,td,th {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:#FFFFFF;
+}
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+h3 {
+	padding: 0px;
+	margin: 0px;
+	font-size:14px;
+	color:#ffcc00;
+	}
 		</style>
 		<script type="text/javascript" language="javascript" src="views/media/js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="views/media/js/jquery.dataTables.js"></script>
@@ -20,7 +38,7 @@
 				alert(  msg );
 				});
 			}
-			
+function start(){
 			//conn
 			var chg = 0;
 			var ws;
@@ -47,7 +65,7 @@
     	//alert("closed");
 		document.getElementById("connection").innerHTML = "close";
 		document.getElementById("connection").style.color = "red";
-		
+		setTimeout(function(){start()}, 500);
   		};
 			
 			//logic
@@ -63,7 +81,7 @@ function update(data)
 	//var color = eval(data);
 	//var chg = eval(data3);
 	//note: this loop is temporary, need optmization
-	for(var i= 1; i <= 1635; i++)
+	for(var i= 0; i <= <?php echo $views[1] ?>; i++)
 	{
 		
 		//var  list = document.getElementById('counter');
@@ -79,7 +97,7 @@ function update(data)
 			if(feed.LAST != undefined)
 			{
 				//list.getElementsByTagName("td")[3].innerHTML = feed.LAST.toFixed(3);
-				list.getElementsByTagName("td")[3].innerHTML = feed.LAST;
+				list.getElementsByTagName("td")[3].innerHTML = feed.LAST.toFixed(3);
 				chg = feed.LAST - prev;
 				lc = setcolor(feed.LAST,prev);
 				blinkColor3(i, 3, lc);
@@ -95,14 +113,14 @@ function update(data)
 			if(feed.BUY != undefined)
 			{
 				//list.getElementsByTagName("td")[6].innerHTML = feed.BUY.toFixed(3);
-				list.getElementsByTagName("td")[6].innerHTML = feed.BUY;
+				list.getElementsByTagName("td")[6].innerHTML = feed.BUY.toFixed(3);
 				bc = setcolor(feed.BUY,prev);
 				blinkColor3(i, 6, bc);
 			}
 			if(feed.SELL != undefined)
 			{
 				//list.getElementsByTagName("td")[7].innerHTML = feed.SELL.toFixed(3);
-				list.getElementsByTagName("td")[7].innerHTML = feed.SELL;
+				list.getElementsByTagName("td")[7].innerHTML = feed.SELL.toFixed(3);
 				sc = setcolor(feed.SELL,prev);
 				blinkColor3(i, 7, sc);
 			}
@@ -114,14 +132,14 @@ function update(data)
 			if(feed.HIGH != undefined)
 			{
 				//list.getElementsByTagName("td")[9].innerHTML = feed.HIGH.toFixed(3);
-				list.getElementsByTagName("td")[9].innerHTML = feed.HIGH;
+				list.getElementsByTagName("td")[9].innerHTML = feed.HIGH.toFixed(3);
 				hc = setcolor(feed.HIGH,prev);
 				blinkColor3(i, 9,hc);
 			}
 			if(feed.LOW != undefined)
 			{
 				//list.getElementsByTagName("td")[10].innerHTML = feed.LOW.toFixed(3);
-				list.getElementsByTagName("td")[10].innerHTML = feed.LOW;
+				list.getElementsByTagName("td")[10].innerHTML = feed.LOW.toFixed(3);
 				lwc =  setcolor(feed.LOW,prev);
 				blinkColor3(i, 10, lwc);
 			}
@@ -149,11 +167,11 @@ function update(data)
 	{
 		if(first > second)
 		{
-		return "blue";
+		return "#00CCFF";
 		}
 		if(first == second)
 		{
-		return "green";
+		return "#00FF33";
 		}
 		if(first < second)
 		{
@@ -204,13 +222,16 @@ function setblinkColor3(r, c,d,bgcolor) {
     list.getElementsByTagName("td")[c].style.background = bgcolor;
 }
 
+//end start();
+}
+start();
 		</script>
-		<table width="100%" border="1" bgcolor="#FFFFFF"  >
+<table width="100%" border="0">
   <tr>
-    <td align="Left">Favourite</td>
-    <td align="right" id="connection" width="50px">&nbsp;</td>
+    <td align="Left"><h3>FAVOURITE</h3></td>
   </tr>
-</table>       
+</table>
+<div class="ex_highlight_row">    
         <?php  if($views[1] == 0) {  ?>
 		<table width="100%" border="1" bgcolor="#FFFFFF"  >
   		<tr>
@@ -220,7 +241,7 @@ function setblinkColor3(r, c,d,bgcolor) {
 		<?php  } else {?>
 <table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="counter">
   <thead>
-    <tr>
+    <tr id="tableHeaders">
       <th>CODE</th>
       <th>SYMBOL</th>
       <th>PREV</th>
@@ -251,26 +272,10 @@ function setblinkColor3(r, c,d,bgcolor) {
       <td  style="color:<?php echo $views[0][$i][18]; ?>"><?php echo $views[0][$i][9]; ?></td>
       <td  style="color:<?php echo $views[0][$i][17]; ?>"><?php echo $views[0][$i][10]; ?></td>
       <td class="center" ><?php echo $views[0][$i][11]; ?></td>
-      <td class="center"><a href='index.php?watch=detail&c=<?php echo $views[0][$i][0]; ?>'>Detail</a>&nbsp;<a href='#' onclick="deltofav('<?php echo $views[0][$i][1];  ?>','<?php echo $i  ?>')">DELETE</a></td>
+      <td class="center"><a href='index.php?watch=detail&c=<?php echo $views[0][$i][0]; ?>'><img src="views/media/images/detailsButton.gif" alt="Details"/></a>&nbsp;<a href='#' onclick="deltofav('<?php echo $views[0][$i][1];  ?>','<?php echo $i  ?>')">DELETE</a></td>
     </tr>
     <?php } ?>
   </tbody>
-  <tfoot>
-    <tr>
-      <th>CODE</th>
-      <th>SYMBOL</th>
-      <th>PREV</th>
-      <th>LAST</th>
-      <th>CHG</th>
-      <th>BCUM</th>
-      <th>BUY</th>
-      <th>SELL</th>
-      <th>SCUM</th>
-      <th>HIGH</th>
-      <th>LOW</th>
-      <th>VOL</th>
-      <th></th>
-    </tr>
-  </tfoot>
 </table>
 <?php  }?>
+</div>

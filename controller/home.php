@@ -10,8 +10,9 @@ var $bil=0;
 public $scoreboard;
 public $ticker;
 public function __construct()  {
-	$this->scoreboard = new scoreboard();
-	$this->ticker = new ticker();
+	//$this->scoreboard = new scoreboard();
+	//$this->ticker = new ticker();
+		//$this->scoreboard = new scoreboard();
 	}
 
 public function main()
@@ -34,7 +35,6 @@ public function get_num_func()
 public function getscoreboard()
 {
 	$score = array();
-	$this->scoreboard = new scoreboard();
 	//$this->scoreboard->create_list_stock();
 	$score[0] = $this->scoreboard->get_total_value();
 	$score[1] = $this->scoreboard->get_total_volume();

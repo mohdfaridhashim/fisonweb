@@ -5,7 +5,9 @@ class loser_controller
 {
 var $bil = 2;
 var $row;
-public function __construct()  {}
+public function __construct()  {
+$this->active = new ticker();
+}
 
 public function main()
 {
@@ -37,9 +39,8 @@ public function view_option()
 
 public function get_active()
 {
-	$this->active = new ticker();
+	
 	$this->active->set_allcounter();
-	//$this->active->create_list_stock();
 	$this->row=$this->active->get_row_allc();
 	return $this->active->get_top_loser();
 

@@ -71,6 +71,7 @@ class favourite extends liststock
 	{
 		return $this->favrows;
 	}
+	
 	public function searchfavourite($userid,$code)
 	{
 		require_once('db.php');

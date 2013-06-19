@@ -3,37 +3,31 @@
  * Table
  */
 table.dataTable {
-	/*margin: 0 auto;
+	margin: 0 auto;
 	clear: both;
-	width: 100%;*/
+	width: 100%;
 }
 
 table.dataTable thead th {
-	padding: 0px 10px 0px 0px;
-	/*
 	padding: 3px 18px 3px 10px;
-	border-bottom: 1px solid black;
+	/*border-bottom: 1px solid black;
 	font-weight: bold;*/
-	border-bottom: 1px solid black;
-	font-weight: bold;
+	background: url(images/menuMO.jpg) repeat;
+	border-right: 1px solid #09F;
+	margin-top:10px;
+	color: #FFF;
 	cursor: pointer;
 	*cursor: hand;
-	font-size:12px;
 }
 
 table.dataTable tfoot th {
-/*padding: 3px 18px 3px 10px;
-	font-weight: bold;
-	padding: 3px 10px 3px 10px;
-*/	font-weight: bold;
-	
+	padding: 3px 18px 3px 10px;
 	border-top: 1px solid black;
-	font-size:12px;
-	
+	font-weight: bold;
 }
 
 table.dataTable td {
-	/*padding: 3px 10px;*/
+	padding: 3px 10px;
 }
 
 table.dataTable td.center,
@@ -41,17 +35,15 @@ table.dataTable td.dataTables_empty {
 	text-align: center;
 }
 
-table.dataTable tr.odd { background-color: #E2E4FF; }
-table.dataTable tr.even { background-color: white; }
+table.dataTable tr.odd { background-color: #444; border-right: 1px solid #000;  }
+table.dataTable tr.even { background-color: #333; border-right: 1px solid #000;  }
 
-table.dataTable tr.odd td.sorting_1 { background-color: #D3D6FF; }
-table.dataTable tr.odd td.sorting_2 { background-color: #DADCFF; }
-table.dataTable tr.odd td.sorting_3 { background-color: #E0E2FF; }
-table.dataTable tr.even td.sorting_1 { background-color: #EAEBFF; }
-table.dataTable tr.even td.sorting_2 { background-color: #F2F3FF; }
-table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
-
-
+table.dataTable tr.odd td.sorting_1 { background-color: #444; border-right: 1px solid #000; }
+table.dataTable tr.odd td.sorting_2 { background-color: #444; border-right: 1px solid #000; }
+table.dataTable tr.odd td.sorting_3 { background-color: #444; border-right: 1px solid #000; }
+table.dataTable tr.even td.sorting_1 { background-color: #333; border-right: 1px solid #000; }
+table.dataTable tr.even td.sorting_2 { background-color: #333; border-right: 1px solid #000; }
+table.dataTable tr.even td.sorting_3 { background-color: #333; border-right: 1px solid #000; }
 /*
  * Table wrapper
  */
@@ -60,10 +52,7 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 	clear: both;
 	*zoom: 1;
 }
-#counter {
-font-size:14px;
-color:#000000;
-}
+
 
 /*
  * Page length menu
@@ -195,9 +184,8 @@ color:#000000;
 	height: 30px;
 	margin-left: -125px;
 	margin-top: -15px;
-	padding: 14px 0 2px 0;*/
+	padding: 14px 0 2px 0; */
 	border: 1px solid #ddd;
-	
 	text-align: center;
 	color: #999;
 	font-size: 10px;
@@ -233,3 +221,70 @@ table.dataTable thead td:active {
 	-webkit-overflow-scrolling: touch;
 }
 
+#tableTitle {
+	background: url(views/media/images/menuMO.jpg) repeat-x;
+	border-right: 1px solid #09F;
+	margin-top:10px;
+	color: #FFF;
+	}
+	
+A:link {
+	text-decoration: none;
+	color: #DDD;
+}
+
+A:visited {
+	text-decoration: none;
+	color: #DDD;
+	}
+
+A:active {
+	text-decoration: none;
+	
+	}
+
+A:hover {
+	text-decoration: underline;
+	}
+/* 
+highlight
+*/
+.ex_highlight #counter tbody tr.even:hover, #counter tbody tr.even td.highlighted {
+	background-color: #b3c6ff;
+}
+
+.ex_highlight #counter tbody tr.odd:hover, #counter tbody tr.odd td.highlighted {
+	background-color: #c6b3ff;
+}
+
+.ex_highlight_row #counter tr.even:hover {
+	background-color: #b3c6ff;
+}
+
+.ex_highlight_row #counter tr.even:hover td.sorting_1 {
+	background-color: #DDFF75;
+}
+
+.ex_highlight_row #counter tr.even:hover td.sorting_2 {
+	background-color: #E7FF9E;
+}
+
+.ex_highlight_row #counter tr.even:hover td.sorting_3 {
+	background-color: #E2FF89;
+}
+
+.ex_highlight_row #counter tr.odd:hover {
+	background-color: #c6b3ff;
+}
+
+.ex_highlight_row #counter tr.odd:hover td.sorting_1 {
+	background-color: #D6FF5C;
+}
+
+.ex_highlight_row #counter tr.odd:hover td.sorting_2 {
+	background-color: #E0FF84;
+}
+
+.ex_highlight_row #counter tr.odd:hover td.sorting_3 {
+	background-color: #DBFF70;
+}

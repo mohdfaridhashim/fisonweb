@@ -8,7 +8,8 @@ class allcounters extends liststock
 function __construct()
 {
 		//it will read all allcounters and all index
-		$this->create_list_stock();
+		//$this->create_list_stock();
+		$this->create_list_stock_from_db();
 }
 public function set_allcounter()
 {

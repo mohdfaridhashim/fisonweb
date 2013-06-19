@@ -1,6 +1,24 @@
 		<style type="text/css" title="currentStyle">
-			@import "views/media/css/demo_page.css";
-			@import "views/media/css/jquery.dataTables.css";
+			/*@import "views/media/css/demo_page.css";*/
+			@import "views/media/css/jquery.dataTables2.css";
+			body,td,th {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:#FFFFFF;
+}
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+h3 {
+	padding: 0px;
+	margin: 0px;
+	font-size:14px;
+	color:#ffcc00;
+	}
 		</style>
 		<script type="text/javascript" language="javascript" src="views/media/js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="views/media/js/jquery.dataTables.js"></script>
@@ -30,9 +48,11 @@
 				});
 			}
 			//conn
-				var ws;
-				var feed;
-				var list3 = null;
+function start(){
+			var number = 1;			
+			var ws;
+			var feed;
+			var list3 = null;
 			var list4 = null;
 			var data = [];
 		 // Let the library know where WebSocketMain.swf is:
@@ -42,8 +62,9 @@
   		ws = new WebSocket("ws://10.10.0.99:8083/");
   		ws.onopen = function() {
     	//ws.send("Hello");  // Sends a message.
-		document.getElementById("connection").innerHTML = "Connected";
-		document.getElementById("connection").style.color = "green";
+		//document.getElementById("connection").innerHTML = "Connected";
+		//document.getElementById("connection").style.color = "green";
+		sendNumber();
   		};
   		ws.onmessage = function(e) {
     	// Receives a message.
@@ -52,11 +73,16 @@
   		};
   		ws.onclose = function() {
     	//alert("closed");
-		document.getElementById("connection").innerHTML = "close";
-		document.getElementById("connection").style.color = "red";
-		
+		//document.getElementById("connection").innerHTML = "close";
+		//document.getElementById("connection").style.color = "red";
+		setTimeout(function(){start()}, 500);
   		};
-			
+		function sendNumber() {
+            ws.send(number.toString());
+			//60 minute
+			console.log("ping");
+            setTimeout(sendNumber, 60000);
+    	}	
 			//logic
 			
 			/* view logic */
@@ -70,7 +96,7 @@ function update(data)
 	//var color = eval(data);
 	//var chg = eval(data3);
 	//note: this loop is temporary, need optmization
-	for(var i= 1; i <= 1635; i++)
+	for(var i= 0; i <= <?php echo $views[1] ?>; i++)
 	{
 		
 		//var  list = document.getElementById('counter');
@@ -86,13 +112,14 @@ function update(data)
 			if(feed.LAST != undefined)
 			{
 				//list.getElementsByTagName("td")[3].innerHTML = feed.LAST.toFixed(3);
-				list.getElementsByTagName("td")[3].innerHTML = feed.LAST;
+				list.getElementsByTagName("td")[3].innerHTML = feed.LAST.toFixed(3);
 				chg = feed.LAST - prev;
 				lc = setcolor(feed.LAST,prev);
 				blinkColor3(i, 3, lc);
 				list.getElementsByTagName("td")[4].innerHTML = chg.toFixed(3);
 				lcc = setcolor(chg,0);
 				blinkColor3(i, 4, lcc);
+				sorting(i);
 			}
 			if(feed.BCUM != undefined)
 			{
@@ -156,11 +183,11 @@ function update(data)
 	{
 		if(first > second)
 		{
-		return "blue";
+		return "#00CCFF";
 		}
 		if(first == second)
 		{
-		return "green";
+		return "#00FF33";
 		}
 		if(first < second)
 		{
@@ -179,7 +206,7 @@ function blinkColor2(r, c) {
 }
 function setblinkColor2(r, c,bgcolor) {
 	list = document.getElementById("counter").tBodies[0].rows[r];
-    list.getElementsByTagName("td")[c].style.color = "black";
+    list.getElementsByTagName("td")[c].style.color = "#FFFFFF";
     list.getElementsByTagName("td")[c].style.background = bgcolor;
 	list = null;
 }
@@ -204,7 +231,9 @@ function setblinkColor3(r, c,d,bgcolor) {
          
 function sorting(value)
 {
-
+			var color = [];
+			var color2 = [];
+			var data = [];
 			//var a = i;
 			a = parseInt(value);
 			//var b = parseInt(a -1);
@@ -315,6 +344,10 @@ color = null;
 color2 = null;		
 }
 
+
+//end start
+}
+start();
    
   	//});
 			
@@ -322,16 +355,16 @@ color2 = null;
 			
 
 		</script>
-
-		<table width="100%" border="1" bgcolor="#FFFFFF"  >
+       
+<table width="100%" border="0">
   <tr>
-    <td align="Left">Most Gainer</td>
-    <td align="right" id="connection" width="50px">&nbsp;</td>
+    <td align="Left"><h3>TOP GAINERS</h3></td>
   </tr>
 </table>
+<div class="ex_highlight_row">
 <table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="counter">
   <thead>
-    <tr>
+    <tr id="tableHeaders">
       <th>CODE</th>
       <th>SYMBOL</th>
       <th>PREV</th>
@@ -344,7 +377,8 @@ color2 = null;
       <th>HIGH</th>
       <th>LOW</th>
       <th>VOL</th>
-      <th></th>
+      <th>&nbsp;</th>
+      
     </tr>
   </thead>
  <tbody >
@@ -362,26 +396,11 @@ color2 = null;
       <td  style="color:<?php echo $views[0][$i][18]; ?>"><?php echo $views[0][$i][9]; ?></td>
       <td  style="color:<?php echo $views[0][$i][17]; ?>"><?php echo $views[0][$i][10]; ?></td>
       <td class="center" ><?php echo $views[0][$i][11]; ?></td>
-      <td class="center"><a href='index.php?watch=detail&c=<?php echo $views[0][$i][0]; ?>'>Detail</a>&nbsp;<a href='#' onclick="addtofav('<?php echo $views[0][$i][1];  ?>')">ADD</a></td>
+      <td class="center"><a href='#' onclick="addtofav('<?php echo $views[0][$i][1];  ?>')"><img src="views/media/images/addButton.gif" alt="Details"/></a></td>
     </tr>
     <?php } } ?>
   </tbody>
-  <tfoot>
-    <tr>
-      <th>CODE</th>
-      <th>SYMBOL</th>
-      <th>PREV</th>
-      <th>LAST</th>
-      <th>CHG</th>
-      <th>BCUM</th>
-      <th>BUY</th>
-      <th>SELL</th>
-      <th>SCUM</th>
-      <th>HIGH</th>
-      <th>LOW</th>
-      <th>VOL</th>
-      <th></th>
-    </tr>
-  </tfoot>
+
 </table>
 
+</div>

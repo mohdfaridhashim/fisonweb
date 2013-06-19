@@ -21,6 +21,7 @@ public function main()
 	$function[3][1] = "true";  //return of a function as a variable
 	$function[4][0] = "get_stock_detail";  //name of the function
 	$function[4][1] = "true";  //return of a function as a variable
+	
 
 	return $function;
 }
@@ -32,7 +33,7 @@ public function get_num_func()
 public function view()
 {
 	//user define view file
-	return "detail2.php";
+	return "detail5.php";
 }
 public function view_option()
 {
@@ -48,7 +49,8 @@ public function get_track()
 	$code = $_GET['c'];
 	//}
 	//$this->detail = new tracking();
-	return $this->detail->get_tracking($code);
+	//return $this->detail->get_tracking($code);
+	return $this->detail->get_intra($code);
 	//$this->row=$this->detail->get_trade_row();
 	//return $this->detail->get_top_actives();
 

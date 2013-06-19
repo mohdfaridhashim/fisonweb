@@ -3,9 +3,11 @@
 <link href="views/css/cssO.css" rel="stylesheet" type="text/css" />
 <link href="views/css/class.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
-        $(document).ready(function() {
-            setInterval("location.reload(true)", 20000);
-        });   
+       /* 
+		$(document).ready(function() {
+            setInterval("location.reload(true)", 30000);
+        });*/
+		
     </script>
     <div id="crawler" class="Arial12" style="color: #FFF;">
     <div class="marquee" id="mycrawler">
@@ -18,11 +20,11 @@
         uniqueid: 'mycrawler',
         style: {
             'padding': '0px',
-            'width': '1200px',
+            'width': '100%',
             'background': 'none',
             'border': 'none'
         },
-        inc: 3, //speed - pixel increment for each iteration of this marquee's movement
+        inc: 2, //speed - pixel increment for each iteration of this marquee's movement
         mouse: 'pause', //mouseover behavior ('pause' 'cursor driven' or false)
         moveatleast: 4,
         neutral: 150,
