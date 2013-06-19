@@ -35,6 +35,10 @@ public function view_option()
 
 public function get_story()
 {
+		//$bodypattern = "/<body[^>]*>(.*?)<\/body>/is";
+  		//$bodyendpattern = "<\/body>/is";
+		$begining_match = '<body>'; 
+		$end_match = '</body>'; 
 	//if(isset($_GET['newsid']))&&(isset($_GET['sourceid']))&&(isset($_GET['categoryid']))
 	if(isset($_GET['newsid']))
 	{
@@ -59,15 +63,34 @@ public function get_story()
 		if($source == "DowJones")
 		{
 		$story =file_get_contents("http://203.106.7.204/dowjonesnews/DowJonesDetails.aspx?newsid=".$_GET['newsid']."&categoryid=".$categoryid."&sourceid=".$sourceid);
+		//$extracted_contens = preg_replace("/\$begining_match([a-z0-9\.])\$end_match/i", "\\1", $story); 
+		$extracted_contens = preg_replace("/.*<body[^>]*>|<\/body>.*/si", "", $story);
+
+  		//$noheader = eregi_replace($bodypattern, "", $story);
+
+  		//$noheader = eregi_replace($bodyendpattern, "", $noheader);
+  		//$noheader = preg_replace($bodypattern, "", $story);
+
+  		//$noheader = preg_replace($bodyendpattern, "", $noheader);
 		}
 		else if($source == "Bernama")
 		{
-		//$this->news->file_get_contents("http://203.106.7.204/bernamanews/BernamaDetails.aspx?newsid=".newsid."$sourceid=".sourceid."$categoryid=".categoryid);
+		//$story = "not yet";
 		//$story =file_get_contents("http://203.106.7.204/dowjonesnews/DowJonesDetails.aspx?newsid=".$_GET['newsid']."&categoryid=".$categoryid."&sourceid=".$sourceid);
-		$story = "not yet";
+		$story =file_get_contents("http://203.106.7.204/dowjonesnews/DowJonesDetails.aspx?newsid=".$_GET['newsid']."&categoryid=".$categoryid."&sourceid=".$sourceid);
+		$extracted_contens = preg_replace("/.*<body[^>]*>|<\/body>.*/si", "", $story);
+
+		}
+		else if($source == "Bursa")
+		{
+		//$story = "not yet";
+		//$story =file_get_contents("http://203.106.7.204/dowjonesnews/DowJonesDetails.aspx?newsid=".$_GET['newsid']."&categoryid=".$categoryid."&sourceid=".$sourceid);
+		$story =file_get_contents("http://203.106.7.204/dowjonesnews/DowJonesDetails.aspx?newsid=".$_GET['newsid']."&categoryid=".$categoryid."&sourceid=".$sourceid);
+		$extracted_contens = preg_replace("/.*<body[^>]*>|<\/body>.*/si", "", $story);
+
 		}
 	}
-	return $story;
+	return $extracted_contens;
 }
 
 //end of class

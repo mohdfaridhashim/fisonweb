@@ -39,7 +39,7 @@ public function view_option()
 	//option included, excluded
 	return "excluded";
 }
-
+//link for NEWS
 public function get_news()
 {
 	if(isset($_GET['sourcename']))
@@ -49,8 +49,18 @@ public function get_news()
 		{
 		$this->news->set_news("http://10.10.0.47/Xml/Bernama.xml","Bernama","11");
 		}
-		else
+		else if($source =="Bursa")
 		{
+		$this->news->set_news("http://10.10.0.47/Xml/Bernama.xml","Bursa","1");
+		}
+		else if($source =="DowJones")
+		{
+		$this->news->set_news("http://10.10.0.47/Xml/DowJones.xml","DowJones","0");
+		}
+		else if($source =="ALL")
+		{
+		$this->news->set_news("http://10.10.0.47/Xml/Bernama.xml","Bernama","11");
+		$this->news->set_news("http://10.10.0.47/Xml/Bernama.xml","Bursa","1");
 		$this->news->set_news("http://10.10.0.47/Xml/DowJones.xml","DowJones","0");
 		}
 	}
@@ -58,6 +68,7 @@ public function get_news()
 	{
 	$this->news->set_news("http://10.10.0.47/Xml/DowJones.xml","DowJones","0");
 	$this->news->set_news("http://10.10.0.47/Xml/Bernama.xml","Bernama","11");
+	$this->news->set_news("http://10.10.0.47/Xml/Bernama.xml","Bursa","1");
 	}
 	return $this->news->get_news();
 }

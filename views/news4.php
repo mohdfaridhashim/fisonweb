@@ -1,6 +1,5 @@
 		<style type="text/css" title="currentStyle">
-			/*@import "views/media/css/demo_page.css";*/
-			@import "views/media/css/jquery.dataTables2.css";
+
 			body,td,th {
 	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
 	font-size: 11px;
@@ -19,10 +18,11 @@ h3 {
 	font-size:14px;
 	color:#ffcc00;
 	}
+table{width: 100%}
+.heading{align="center"; font-size: 12px;}
 		</style>
-<div class="ex_highlight_row">
+        <body>
 <?php echo $views[0]; ?>
-
-            </div>
+            </body>
 
 

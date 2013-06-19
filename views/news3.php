@@ -32,10 +32,9 @@ h3 {
         			i,false,true);
 			}
 			$(document).ready(function() {
-				$('#counter').dataTable({ "bProcessing": true,"bDeferRender": true,"sPaginationType": "full_numbers","bFilter": true,"bLengthChange": false,"bInfo": false,"bPaginate": true,"aaSorting": [[ "1", "desc" ]],"bSort": true
-						}).columnFilter(); 
-						
-							
+				$('#counter').dataTable({ "bProcessing": true,"bDeferRender": true,"sPaginationType": "full_numbers","bFilter": true,"bLengthChange": false,"bInfo": false,"bPaginate": true,"aaSorting": [[ "1", "desc" ]],"bSort": true,
+				"sDom": '<"top"><"clear">tl<"botton" pr><"clear">'
+				}).columnFilter(); 			
 			
 			$("#col2_filter").keyup( function() { fnFilterColumn( 2 ); } );
 			} );
@@ -45,36 +44,38 @@ h3 {
     <td align="Left"><h3>NEWS</h3></td>
   </tr>
   <tr>
-    <td align="Left"><A href="">BERNAMA</A> | <a href="">DOW JONES</a></td>
- <td>Search By keyword:<input type="text" name="col2_filter" id="col2_filter" /> 
- TTest</td>
+    <td align="Left"><a href="index.php?watch=news&sourcename=Bernama"><b>BERNAMA</b></a> | <a href="index.php?watch=news&sourcename=DowJones"><b>DOW JONES</b></a>| <a href="index.php?watch=news&sourcename=Bursa"><b>BURSA</b></a> | <a href="index.php?watch=news&sourcename=ALL"><b>ALL</b></a></td>
+ <td align="right">Search By keyword:<input type="text" name="col2_filter" id="col2_filter" /></td>
 </tr>
 </table>
 <div class="ex_highlight_row">
   <table id="counter" width="100%" border="0" class="display" cellpadding="0" cellspacing="0">
               <thead>
               <tr id="tableHeaders">
-  				<th width="40px">Source</th>
-                <th>Dateline</th>
-                <th>Headline</th>
+  				<th width="10%">Source</th>
+                <th width="20%">Dateline</th>
+                <th width="70%">Headline</th>
               </tr>
               </thead>
-              <tfoot>
-			<tr>
-  				<th>Source</th>
-                <th>Dateline</th>
-                <th>Headline</th>
-			</tr>
-		</tfoot>
 			 <tbody >
                <?php for($i = 0; $i < $views[1]; $i++) { ?>
               <tr>
                 <td><?php echo $views[0][$i][0] ?></td>
                 <td><?php echo $views[0][$i][2]." ".$views[0][$i][1] ?></td>
-                <td ><a href="#"><?php echo $views[0][$i][5] ?></a></td>
+                <td ><a href="index.php?watch=story&newsid=<?php echo $views[0][$i][6] ?>&sourceid=<?php echo $views[0][$i][3] ?>&categoryid=<?php echo $views[0][$i][4] ?>&news=<?php echo $views[0][$i][0] ?>" target="story"><?php echo $views[0][$i][5] ?></a></td>
               </tr>
               <?php } ?>
                </tbody>
-                           </table>
+                </table>
             </div>
+            <table width="100%">
+            <tr>
+            <td>
+			<!-- resize story space -->
+            <iframe name="story" width="100%" frameborder="1" height="200" scrolling="yes"></iframe>
+            </td>
+            </tr>
+            </table>
+
+
 
